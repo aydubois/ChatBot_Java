@@ -1,7 +1,9 @@
 package chatrabia.domain;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+@Component
 public class Message implements Serializable {
 
     private static int currentId = 0;

@@ -1,6 +1,8 @@
 package chatrabia.controller;
 
 import chatrabia.domain.Message;
+import chatrabia.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,7 @@ public class MessageController {
     @GetMapping(value = "{user}/{message}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message getQuestion(@PathVariable String user, @PathVariable String message) {
+        //messageService.getMessageUser(message, user);
         Message currentMessage = new Message();
         currentMessage.setUserMessage(message);
         currentMessage.setUserName(user);
