@@ -35,4 +35,22 @@ public class MessageController {
         return currentMessage;
     }
 
+    // [APIs]
+
+    // https://official-joke-api.appspot.com/random_joke
+    // https://official-joke-api.appspot.com/jokes/programming/random
+    // https://official-joke-api.appspot.com/jokes/knock-knock/random
+
+    // citations : https://fortuneapi.herokuapp.com/drugs
+    //              on peut soit ne pas mettre de param soit remplacer "drugs" par un des nom de fichiers ici : https://github.com/sarah256/fortune-api/tree/master/datfiles
+
+    // geek jokes : https://geek-jokes.sameerkumar.website/api  -> String
+    //              https://geek-jokes.sameerkumar.website/api?format=json -> json
+
+    // Cocktail api : https://www.thecocktaildb.com/api.php
+    // random dog picture : https://random.dog/woof.json
+
+    // https://jokeapi.dev/
+
+    // https://icanhazdadjoke.com/api#fetch-a-random-dad-joke
 }
