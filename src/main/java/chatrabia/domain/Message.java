@@ -9,10 +9,10 @@ public class Message implements Serializable {
     private static int currentId = 0;
 
     private final int id;
-    private String userName;
-    private String userMessage;
-    private String botMessage;
-    private String option;
+    private String userName = null;
+    private String userMessage = null;
+    private String botMessage = null;
+    private String option = null;
 
     public Message() {
 

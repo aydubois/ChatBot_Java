@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Shifumi>
+    <Category>
+        <pattern>[P|p]ier</pattern>
+        <option>pierre</option>
+    </Category>
+    <Category>
+        <pattern>[F|f]euil</pattern>
+        <option>feuille</option>
+    </Category>
+    <Category>
+        <pattern>[C|c]is[ea|o]</pattern>
+        <option>ciseau</option>
+    </Category>
+    <Category>
+        <pattern>[P|p]ui</pattern>
+        <option>puit</option>
+    </Category>
+    <Category>
+        <pattern>r[e|è]gle</pattern>
+        <option>regle</option>
+    </Category>
+    <Category>
+        <pattern>([S|s]stop)|(arr[e|ê]t)</pattern>
+        <option>stop</option>
+    </Category>
+</Shifumi>

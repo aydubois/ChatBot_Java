@@ -1,24 +1,42 @@
 <?xml version="1.0"?>
 <Config>
     <Category>
-        <pattern>Bonjour</pattern>
+        <pattern>(putain)|(connard)|(encul.*)</pattern>
+        <template>Yob tvoyu mat' ! Modak ... </template>
+    </Category>
+    <Category>
+        <pattern>[^a-z][A-Z]+</pattern>
+        <template>Pas la peine de crier, de toute façon j'ai pas d'oreille ...</template>
+    </Category>
+    <Category>
+        <pattern>([B|b]onjour)|([S|s][a]*l[u]*t)|([H|h]ey)</pattern>
         <template>Bonjour à toi jeune sacripan !</template>
     </Category>
     <Category>
-        <pattern>.* ton age</pattern>
+        <pattern>(ton [a|â]ge)|(tu.*[a|â]ge)</pattern>
         <template>J'ai 3 fois l'âge de ton père divisé par l'âge de ton chat multiplié par le nombre de touches sur ton clavier</template>
+        <template>Demande à ta mère ;)</template>
     </Category>
     <Category>
-        <pattern>Bye</pattern>
+        <pattern>([B|b]ye)|([A|a]u revoir)|([A|a] plus)</pattern>
         <template>A la revoyure !</template>
+        <template>A plus.</template>
+        <template>Tu pars déjà, c'est triste.</template>
+        <template>Enfin ...</template>
     </Category>
     <Category>
-        <pattern>Musique</pattern>
-        <template>Je ne comprend pas...</template>
-        <option>MusicBrainz</option>
+        <pattern>[S|s]h[i|y]fum[i|y]</pattern>
+        <template></template>
+        <option>shifumi</option>
     </Category>
     <Category>
-        <pattern>*</pattern>
-        <template>Je ne comprend pas...</template>
+        <pattern>[M|m]usi[que|c]</pattern>
+        <template></template>
+        <option>musicbrainz</option>
+    </Category>
+    <Category>
+        <pattern>.*</pattern>
+        <template></template>
+        <option>wikipedia</option>
     </Category>
 </Config>
