@@ -25,7 +25,7 @@ public class HttpService {
         this.webClient = webClient;
     }
 
-    public <T> T sendGetRequest(String url, Class<T> c) throws ExternalAPIException {
+    public <T> T sendGetRequest(String url, Class<T> c, ArrayList<String> headers) throws ExternalAPIException {
 
         ClientResponse clientResponse;
         Mono<ClientResponse> fluxResponse;
@@ -33,6 +33,14 @@ public class HttpService {
         WebClient.RequestHeadersSpec<?> requestSpec = webClient
                 .get()
                 .uri(URI.create(url));
+
+        if(headers != null) {
+            headers.forEach( element -> {String[] strings = element.split(":");
+                String key = strings[0];
+                String value = strings[1];
+                requestSpec.header(key, value);
+            });
+        }
 
         try {
             fluxResponse = requestSpec.exchange();
