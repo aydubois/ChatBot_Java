@@ -1,27 +1,14 @@
 package chatrabia.controller;
 
+import chatrabia.domain.Message;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 
 @RestController
-@RequestMapping(value = "/message")
+@RequestMapping(value = "/")
 public class MessageController {
-
-    public class Message implements Serializable {
-        public Integer id;
-        public String message;
-
-        public Message(Integer id, String message) {
-            this.id = id;
-            this.message = message;
-        }
-
-        public Message(String message) {
-            this(null, message);
-        }
-    }
 
     public MessageController() {
         super();
@@ -32,10 +19,13 @@ public class MessageController {
         return "test";
     }
 
-    @GetMapping(value = "/{message}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{user}/{message}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message getQuestion(@PathVariable String message) {
-        return new Message(1, message);
+        Message currentMessage = new Message();
+        currentMessage.setUserMessage(message);
+        currentMessage.setBotMessage("c'est un cheval qui voit un zebre");
+        return currentMessage;
     }
 
 }
