@@ -19,11 +19,12 @@ public class MessageController {
         return "test";
     }
 
-    @GetMapping(value = "/{user}/{message}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{user}/{message}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Message getQuestion(@PathVariable String message) {
+    public Message getQuestion(@PathVariable String user, @PathVariable String message) {
         Message currentMessage = new Message();
         currentMessage.setUserMessage(message);
+        currentMessage.setUserName(user);
         currentMessage.setBotMessage("c'est un cheval qui voit un zebre");
         return currentMessage;
     }
