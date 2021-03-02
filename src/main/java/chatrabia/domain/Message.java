@@ -1,13 +1,21 @@
 package chatrabia.domain;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
+
+    private static int currentId = 0;
+
     private final int id;
+    private String userName;
     private String userMessage;
     private String botMessage;
     private String option;
 
-    public Message(int id) {
-        this.id = id;
+    public Message() {
+
+        this.id = currentId;
+        currentId++;
     }
 
     public int getId() {
@@ -36,5 +44,13 @@ public class Message {
 
     public void setOption(String option) {
         this.option = option;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
