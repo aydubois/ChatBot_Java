@@ -1,6 +1,6 @@
-package util;
+package chatrabia.util;
 
-import bot.AssocPatternResponse;
+import chatrabia.bot.AssocPatternResponse;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class ChatBotData {
 
 
     private ChatBotData() {
-        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/bot/config.xml").build();
+        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/chatrabia.bot/config.xml").build();
         patternResponse.addAll(parseXml.getPatternResponse());
     }
 

@@ -1,4 +1,4 @@
-package services;
+package chatrabia.domain;
 
 public class Message {
     private final int id;

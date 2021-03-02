@@ -1,4 +1,4 @@
-import util.ChatBotData;
+import chatrabia.util.ChatBotData;
 
 public class Main {
 

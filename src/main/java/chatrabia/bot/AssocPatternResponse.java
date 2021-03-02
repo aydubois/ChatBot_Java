@@ -1,4 +1,4 @@
-package bot;
+package chatrabia.bot;
 
 import java.util.ArrayList;
 

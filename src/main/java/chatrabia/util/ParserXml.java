@@ -1,6 +1,6 @@
-package util;
+package chatrabia.util;
 
-import bot.AssocPatternResponse;
+import chatrabia.bot.AssocPatternResponse;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
