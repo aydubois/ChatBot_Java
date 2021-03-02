@@ -7,11 +7,5 @@
       </list>
     </option>
   </component>
-<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="openjdk-15 intellij" project-jdk-type="JavaSDK" />
-=======
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="openjdk-15 intellij" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
->>>>>>> 6e222ca649a8cf224225d11a37095473a74766ae
 </project>

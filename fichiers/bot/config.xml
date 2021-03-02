@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Config>
+    <Category>
+        <pattern>Bonjour</pattern>
+        <template>Bonjour à toi jeune sacripan !</template>
+    </Category>
+    <Category>
+        <pattern>.* ton age</pattern>
+        <template>J'ai 3 fois l'âge de ton père divisé par l'âge de ton chat multiplié par le nombre de touches sur ton clavier</template>
+    </Category>
+    <Category>
+        <pattern>Bye</pattern>
+        <template>A la revoyure !</template>
+    </Category>
+    <Category>
+        <pattern>Musique</pattern>
+        <template>Je ne comprend pas...</template>
+        <option>MusicBrainz</option>
+    </Category>
+    <Category>
+        <pattern>*</pattern>
+        <template>Je ne comprend pas...</template>
+    </Category>
+</Config>

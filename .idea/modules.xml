@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/chatrabia.iml" filepath="$PROJECT_DIR$/chatrabia.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/.idea/chatrabia.iml" filepath="$PROJECT_DIR$/.idea/chatrabia.iml" />
->>>>>>> 6e222ca649a8cf224225d11a37095473a74766ae
     </modules>
   </component>
 </project>
