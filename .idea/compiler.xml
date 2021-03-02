@@ -13,9 +13,12 @@
       <module name="chatrabia" target="15" />
     </bytecodeTargetLevel>
   </component>
+<<<<<<< HEAD
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="chatrabia" options="-parameters" />
     </option>
   </component>
+=======
+>>>>>>> 6e222ca649a8cf224225d11a37095473a74766ae
 </project>
