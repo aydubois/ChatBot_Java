@@ -10,7 +10,7 @@ public class ChatBotData {
 
 
     private ChatBotData() {
-        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/chatrabia.bot/config.xml").build();
+        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/bot/config.xml").build();
         patternResponse.addAll(parseXml.getPatternResponse());
     }
 
