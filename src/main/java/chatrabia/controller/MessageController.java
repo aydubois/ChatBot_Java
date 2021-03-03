@@ -25,17 +25,12 @@ public class MessageController {
         return "test";
     }
 
+    @CrossOrigin(origins = "http://127.0.0.1:1234")
     @GetMapping(value = "{user}/{message}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message getQuestion(@PathVariable String user, @PathVariable String message) {
         Message currentMessage = messageService.getMessageUser(message, user);
-        //Message currentMessage = new Message();
-        //currentMessage.setUserMessage(message);
-        //currentMessage.setUserName(user);
 
-        //String joke = chuckNorrisService.getChuckNorrisRandomJokeByName(user);
-
-        //currentMessage.setBotMessage(currentMessage.getBotMessage());
         return currentMessage;
     }
 
