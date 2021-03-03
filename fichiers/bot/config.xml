@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Config>
     <Category>
-        <pattern>(putain)|(connard)|(encul.*)</pattern>
+        <pattern>(putain)|(connard)|(encul.*)|(bite)</pattern>
         <template>Yob tvoyu mat' ! Modak ... </template>
     </Category>
     <Category>
@@ -9,7 +9,7 @@
         <template>Pas la peine de crier, de toute façon j'ai pas d'oreille ...</template>
     </Category>
     <Category>
-        <pattern>([B|b]onjour)|([S|s][a]*l[u]*t)|([H|h]ey)</pattern>
+        <pattern>([B|b]onjour)|([S|s][a]*l[u]*t)|([H|h]ey)|([C|c]oucou)|([H|h]ello)|(^[Y|y]o)</pattern>
         <template>Bonjour à toi jeune sacripan !</template>
     </Category>
     <Category>

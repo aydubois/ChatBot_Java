@@ -33,9 +33,9 @@ public class MessageController {
         //currentMessage.setUserMessage(message);
         //currentMessage.setUserName(user);
 
-        String joke = chuckNorrisService.getChuckNorrisRandomJokeByName(user);
+        //String joke = chuckNorrisService.getChuckNorrisRandomJokeByName(user);
 
-        currentMessage.setBotMessage(currentMessage.getBotMessage());
+        //currentMessage.setBotMessage(currentMessage.getBotMessage());
         return currentMessage;
     }
 

@@ -13,11 +13,30 @@ import java.util.regex.Pattern;
 
 @Service
 public class MessageService {
+
+    private final ShifumiService shifumiService;
     private final ChatBotData cbd = ChatBotData.getInstance();
+
+    public MessageService(ShifumiService shifumiService){
+        this.shifumiService = shifumiService;
+    }
+
     public Message getMessageUser(String message, String user){
-        String messageBot = this.regexMsg(message);
-        Message msg = this.createMessage(user, message, messageBot);
-        return msg;
+        Message msg = this.createMessage(user, message);
+        Thread threadShifumi = new Thread(shifumiService.createRunnable(msg));
+        threadShifumi.start();
+
+
+        try {
+            threadShifumi.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("thread interrupted");
+        }
+            //String messageBot = this.regexMsg(message);
+
+            return msg;
+
     }
 
     private String regexMsg(String message){
@@ -58,7 +77,6 @@ public class MessageService {
 
     }
     private AssocPatternResponse testRegex(String message, AssocPatternResponse assocPR){
-        System.out.println(assocPR.getPattern());
         Pattern patt = Pattern.compile(assocPR.getPattern());
         Matcher matcher = patt.matcher(message);
         if(matcher.find()){
@@ -74,11 +92,10 @@ public class MessageService {
         }
         return null;
     }
-    private Message createMessage(String user, String message, String messageBot){
+    private Message createMessage(String user, String message){
         Message msg = new Message();
         msg.setUserName(user);
         msg.setUserMessage(message);
-        msg.setBotMessage(messageBot);
         return msg;
     }
     private String checkOption(AssocPatternResponse assocPR){
