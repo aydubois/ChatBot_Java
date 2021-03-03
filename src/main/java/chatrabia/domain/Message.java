@@ -3,6 +3,8 @@ package chatrabia.domain;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
 @Component
 public class Message implements Serializable {
 
@@ -11,7 +13,7 @@ public class Message implements Serializable {
     private final int id;
     private String userName = null;
     private String userMessage = null;
-    private String botMessage = null;
+    private ArrayList<String> botMessage = new ArrayList<>();
     private String option = null;
 
     public Message() {
@@ -32,14 +34,13 @@ public class Message implements Serializable {
         this.userMessage = userMessage;
     }
 
-    public String getBotMessage() {
+    public ArrayList<String> getBotMessage() {
         return botMessage;
     }
 
-    public void setBotMessage(String botMessage) {
-        this.botMessage = botMessage;
+    public void addBotMessage(String botMessage) {
+        this.botMessage.add(botMessage);
     }
-
     public String getOption() {
         return option;
     }

@@ -1,21 +1,30 @@
 <?xml version="1.0"?>
 <Config>
     <Category>
-        <pattern>(putain)|(connard)|(encul.*)</pattern>
+        <pattern>(putain)|(connard)|(encul.*)|( bite )</pattern>
         <template>Yob tvoyu mat' ! Modak ... </template>
+        <template>Podonok </template>
+        <template>Idi nia houille </template>
+        <template>Ti govniouk</template>
     </Category>
     <Category>
         <pattern>[^a-z][A-Z]+</pattern>
         <template>Pas la peine de crier, de toute façon j'ai pas d'oreille ...</template>
+        <template>Je ne répond pas aux hurleurs</template>
+        <template>Baisse d'un ton</template>
     </Category>
     <Category>
-        <pattern>([B|b]onjour)|([S|s][a]*l[u]*t)|([H|h]ey)</pattern>
+        <pattern>([B|b]onjour)|([S|s][a]*l[u]*t)|([H|h]ey)|([C|c]oucou)|([H|h]ello)|(Yo)|(yo)</pattern>
         <template>Bonjour à toi jeune sacripan !</template>
+        <template>Salut !</template>
+        <template>Yo !</template>
     </Category>
     <Category>
         <pattern>(ton [a|â]ge)|(tu.*[a|â]ge)</pattern>
         <template>J'ai 3 fois l'âge de ton père divisé par l'âge de ton chat multiplié par le nombre de touches sur ton clavier</template>
         <template>Demande à ta mère ;)</template>
+        <template>Tu veux pas savoir</template>
+        <template>42</template>
     </Category>
     <Category>
         <pattern>([B|b]ye)|([A|a]u revoir)|([A|a] plus)</pattern>
@@ -25,18 +34,20 @@
         <template>Enfin ...</template>
     </Category>
     <Category>
-        <pattern>[S|s]h[i|y]fum[i|y]</pattern>
-        <template></template>
-        <option>shifumi</option>
+        <pattern>[O|o]ù.*?$</pattern>
+        <template>Dans ton cul</template>
+        <template>Ici et là-bas</template>
+        <template>Chez ta mère</template>
     </Category>
     <Category>
-        <pattern>[M|m]usi[que|c]</pattern>
-        <template></template>
-        <option>musicbrainz</option>
+        <pattern>(^asv$)|(^ASV$)</pattern>
+        <template>42 - non binaire - dtc</template>
     </Category>
     <Category>
-        <pattern>.*</pattern>
-        <template></template>
-        <option>wikipedia</option>
+        <pattern>(^[J|j]e t'aime$)|(jtm)</pattern>
+        <template>Comme un fou, comme un soldat ? #NOP</template>
+        <template>pfff ...</template>
+        <template>...</template>
+        <template>#NOP</template>
     </Category>
 </Config>

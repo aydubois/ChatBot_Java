@@ -13,16 +13,18 @@ import java.util.ArrayList;
 
 
 class ParseXml {
-        private final ArrayList<AssocPatternResponse> patternResponse;
+    private final ArrayList<AssocPatternResponse> patternResponse;
+    private final ArrayList<String> services;
 
         private ParseXml(ParseBuilder builder) {
+            this.services = builder.services;
             this.patternResponse = builder.patternResponse;
         }
 
         public ArrayList<AssocPatternResponse> getPatternResponse() {
             return patternResponse;
         }
-
+        public ArrayList<String> getServices(){return services;}
         public void printList(ParseBuilder.types type){
             switch (type){
                 case PR -> patternResponse.forEach(patternResponse -> patternResponse.afficher());
@@ -31,8 +33,8 @@ class ParseXml {
         }
         public static class ParseBuilder {
             private final ArrayList<AssocPatternResponse> patternResponse;
-
-            public enum types {PR}
+            private ArrayList<String> services;
+            public enum types {PR, SERV}
 
             ;
 
@@ -45,9 +47,10 @@ class ParseXml {
                 return parsexml;
             }
 
-            /*public ParseBuilder addXmlAutre(String filenameXmlAutre) {
-                //
-            }*/
+            public ParseBuilder addXmlService(String filenameXmlService) {
+                this.services = (ArrayList<String>) parse(filenameXmlService, types.SERV);
+                return this;
+            }
 
             private ArrayList<?> parse(String filename, types type) {
                 try {
@@ -68,6 +71,8 @@ class ParseXml {
                 switch (typeCla) {
                     case PR:
                         return getConfig(doc);
+                    case SERV:
+                        return getServ(doc);
                     default:
                         return null;
 
@@ -104,6 +109,21 @@ class ParseXml {
             }
         }
 
+    private static ArrayList<String> getServ(Document doc) {
+        ArrayList<String> SERVObject = new ArrayList<>();
+        NodeList nListCategory = doc.getElementsByTagName("Services");
+        for (int temp = 0; temp < nListCategory.getLength(); temp++) {
 
+            Node nNodeCategory = nListCategory.item(temp);
 
+            if (nNodeCategory.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElementCategory = (Element) nNodeCategory;
+                String oneAssocPR = eElementCategory.getElementsByTagName("pattern").item(0).getTextContent();
+                SERVObject.add(oneAssocPR);
+
+            }
+        }
+        return SERVObject;
     }
+}
+
