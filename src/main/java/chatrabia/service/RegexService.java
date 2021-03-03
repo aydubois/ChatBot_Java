@@ -26,12 +26,31 @@ public class RegexService {
         }
 
         if(patternResponseMatch.size() > 0){
-            return patternResponse.get(0);
+            return patternResponseMatch.get(0);
             // TODO : Que faire si plusieurs match ???
         }
         return null;
     }
 
+    public String checkMessageWithServices(String message){
+        ArrayList<String> patternResponse = cbd.getServices();
+        ArrayList<String> patternResponseMatch = new ArrayList<>();
+
+        for (int i = 0; i < patternResponse.size() ; i++) {
+            String assocPR = patternResponse.get(i);
+            Pattern patt = Pattern.compile(assocPR);
+            Matcher matcher = patt.matcher(message);
+            if (matcher.find()) {
+                patternResponseMatch.add(assocPR);
+            }
+        }
+
+        if(patternResponseMatch.size() > 0){
+            return patternResponseMatch.get(0);
+            // TODO : Que faire si plusieurs match ???
+        }
+        return null;
+    }
     public boolean check2Words(String wordA, String pattern){
         Pattern patt = Pattern.compile(pattern);
         Matcher matcher = patt.matcher(wordA);

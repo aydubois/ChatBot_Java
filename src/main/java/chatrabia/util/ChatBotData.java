@@ -7,11 +7,14 @@ import java.util.ArrayList;
 public class ChatBotData {
     private static volatile ChatBotData instance = null;
     private ArrayList<AssocPatternResponse> patternResponse = new ArrayList<>();
+    private ArrayList<String> services = new ArrayList<>();
 
 
     private ChatBotData() {
-        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/bot/config.xml").build();
+        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/bot/config.xml").addXmlService("fichiers/bot/service.xml").build();
         patternResponse.addAll(parseXml.getPatternResponse());
+        services.addAll(parseXml.getServices());
+
     }
 
     public static ChatBotData getInstance() {
@@ -26,6 +29,9 @@ public class ChatBotData {
 
     public ArrayList<AssocPatternResponse> getPatternResponse() {
         return patternResponse;
+    }
+    public ArrayList<String> getServices() {
+        return services;
     }
 
 }

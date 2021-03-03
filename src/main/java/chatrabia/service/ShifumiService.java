@@ -13,7 +13,7 @@ public class ShifumiService{
     private final RegexService regexService;
     private Shifumi shifumi = new Shifumi();
     private String[] response = {"Pierre", "Feuille", "Ciseaux", "Pierre", "Feuille", "Ciseaux", "Puit"}; // diminue les chances d'avoir puit xD
-
+    private boolean isActivated = false;
     public Runnable createRunnable( Message message){
         Runnable aRunnable = new Runnable(){
             public void run(){
@@ -27,7 +27,7 @@ public class ShifumiService{
         this.regexService = regexService;
     }
 
-    public void myRun(Message message){
+    private void myRun(Message message){
         String messageUser = message.getUserMessage();
         // Si pas activé && messageUser != Shifumi -> on passe notre chemin, Thread terminé
         if(!checkIsActivated() && !checkStarting(messageUser)){
@@ -73,15 +73,18 @@ public class ShifumiService{
             }
         }
     }
+    public boolean getActivated(){
+        return isActivated;
+    }
     private boolean checkStarting(String messageUser){
         return regexService.check2Words(messageUser, "[S|s]h[i|y]fum[i|y]");
     }
     private String startShifumi(){
-        shifumi.setActivated(true);
-        return "Let's go ! J'adore le Shifimu. Je te laisse commencer écris Pierre / Feuille ou Ciseau";
+        isActivated = true;
+        return "Let's go ! J'adore le Shifimu. Je te laisse commencer écris Pierre / Feuille ou Ciseaux";
     }
     private boolean checkIsActivated(){
-        return shifumi.isActivated();
+        return isActivated;
     }
 
     private String checkResponseUser(String messageUser){
@@ -143,7 +146,7 @@ public class ShifumiService{
     private void resetShifumi(){
         shifumi.setScoreUser(0);
         shifumi.setScoreBot(0);
-        shifumi.setActivated(false);
+        isActivated = false;
     }
 
 

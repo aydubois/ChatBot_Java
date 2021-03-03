@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Services>
+    <pattern>[S|s]h[i|y]fum[i|y]</pattern>
+    <pattern>([B|b]lague)|([J|j]oke)</pattern>
+    <pattern>[M|m]usi[c|que]</pattern>
+</Services>
