@@ -25,7 +25,7 @@ public class MessageController {
         return "test";
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:1234")
+    @CrossOrigin(origins = {"http://127.0.0.1:1234", "http://localhost:1234"})
     @GetMapping(value = "{user}/{message}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message getQuestion(@PathVariable String user, @PathVariable String message) {
