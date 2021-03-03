@@ -33,10 +33,13 @@ public class MessageController {
         //Message currentMessage = new Message();
         //currentMessage.setUserMessage(message);
         //currentMessage.setUserName(user);
+        if(currentMessage.getUserMessage().matches(".*[Cc]huck.*|.*CHUCK.*")) {
+            String joke = chuckNorrisService.getChuckNorrisRandomJoke();
+            currentMessage.setBotMessage(joke);
+        } else {
+            currentMessage.setBotMessage(currentMessage.getBotMessage());
+        }
 
-        String joke = chuckNorrisService.getChuckNorrisRandomJoke();
-        // currentMessage.setBotMessage(joke);
-        currentMessage.setBotMessage(currentMessage.getBotMessage());
         return currentMessage;
     }
 
