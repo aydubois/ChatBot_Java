@@ -13,7 +13,7 @@ public class DogImageService {
     private static Logger log = LogManager.getRootLogger();
 
     private static final String pattern = "[Dd]og|[Cc]hien|[Ww]oof|[Ww]af";
-    private static final String imagePattern = ".*\\.(jpg|jpeg|png|gif).*";
+    private static final String imagePattern = ".*\\.(jpg|jpeg|png|gif|JPG).*";
 
     private HttpService httpService;
     private static final String dogImageApiRandomUrl = "https://random.dog/woof.json";
@@ -22,21 +22,26 @@ public class DogImageService {
         this.httpService = httpService;
     }
 
-    public String getRandomDogImage() {
+    public String getRandomDogImageUrl() {
 
-            DogImage dogImage;
+            DogImage dogImage = new DogImage();
+
             int count = 0;
+            boolean isMatch = false;
 
-            do {
+            while (count++ < 20 && !isMatch) {
                 try {
                     dogImage = httpService.sendGetRequest(dogImageApiRandomUrl, DogImage.class, null);
+                    isMatch = dogImage.getUrl().matches(imagePattern);
+
                     log.warn("dogImage  "+dogImage.getUrl());
-                } catch (ExternalAPIException e) {
-                    e.printStackTrace();
+                    if(!isMatch) Thread.sleep(1000);
+
+                } catch (ExternalAPIException | InterruptedException e) {
+                    log.error(e.toString());
                     return "";
                 }
             }
-            while (count++ < 20 && !dogImage.getUrl().matches(imagePattern));
 
             return dogImage.getUrl();
     }

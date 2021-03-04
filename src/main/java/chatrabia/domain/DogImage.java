@@ -3,7 +3,7 @@ package chatrabia.domain;
 public class DogImage {
 
     private Integer fileSizeBytes;
-    private String url;
+    private String url = "";
 
     public Integer getFileSizeBytes() {
         return fileSizeBytes;
