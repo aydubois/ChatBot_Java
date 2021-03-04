@@ -104,7 +104,7 @@ public class ShifumiService{
         return response[Util.getRandom(0, response.length-1)];
     }
 
-    private boolean setScoreUser(String messageUser, String responseBot){
+    private boolean setScoreBot(String messageUser, String responseBot){
         if((messageUser.equals("Pierre") && responseBot.equals("Feuille"))||
                 (messageUser.equals("Ciseaux") && responseBot.equals("Pierre"))||
                 (messageUser.equals("Feuille") && responseBot.equals("Ciseaux"))||
@@ -116,7 +116,7 @@ public class ShifumiService{
         }
         return false;
     }
-    private boolean setScoreBot(String messageUser, String responseBot){
+    private boolean setScoreUser(String messageUser, String responseBot){
         if((responseBot.equals("Pierre") && messageUser.equals("Feuille"))||
                 (responseBot.equals("Ciseaux") && messageUser.equals("Pierre"))||
                 (responseBot.equals("Feuille") && messageUser.equals("Ciseaux"))||
