@@ -61,13 +61,21 @@ public class AleatoireService extends GetHttp {
     //Idem
     private String[] traitementJoie(String sentence){
         String[] strings = sentence.split("<h1 class=\"blog-post-title single-blog-post-title\">");
-        String[] sentencePresqueOK = strings[1].split("</h1>");
-        String titre = sentencePresqueOK[0];
-        String[] urlImagePresqueOK = strings[1].split(" type=image/gif>");
-        urlImagePresqueOK = urlImagePresqueOK[0].split("data=");
-        String urlImage =  urlImagePresqueOK[1];
-        String[] datas = {titre, urlImage};
-        return datas;
+        if(strings.length >= 2 ) {
+
+            String[] sentencePresqueOK = strings[1].split("</h1>");
+            if(sentencePresqueOK.length >= 1) {
+                String titre = sentencePresqueOK[0];
+                String[] urlImagePresqueOK = strings[1].split(" type=image/gif>");
+                if(urlImagePresqueOK.length >= 2){
+                    urlImagePresqueOK = urlImagePresqueOK[0].split("data=");
+                    String urlImage = urlImagePresqueOK[1];
+                    String[] datas = {titre, urlImage};
+                    return datas;
+                }
+            }
+        }
+        return null;
 
     }
 }

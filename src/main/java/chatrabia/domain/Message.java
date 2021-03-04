@@ -13,6 +13,7 @@ public class Message implements Serializable {
     private final int id;
     private String userName = null;
     private String userMessage = null;
+    private String botName = "Nono";
     private ArrayList<String> botMessage = new ArrayList<>();
     private String option = null;
 
@@ -55,5 +56,13 @@ public class Message implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getBotName() {
+        return botName;
+    }
+
+    public void setBotName(String botName) {
+        this.botName = botName;
     }
 }

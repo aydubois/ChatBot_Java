@@ -13,7 +13,7 @@ public class DogImageService extends GetHttp {
     private static Logger log = LogManager.getRootLogger();
 
     private static final String pattern = "[Dd]og|[Cc]hien|[Ww]oof|[Ww]af";
-    private static final String imagePattern = ".*\\.(jpg|jpeg|png|gif).*";
+    private static final String imagePattern = ".*\\.(jpg|jpeg|png|gif|JPG).*";
 
     private static final String dogImageApiRandomUrl = "https://random.dog/woof.json";
 
@@ -24,20 +24,25 @@ public class DogImageService extends GetHttp {
     @Override
     public String get() {
 
-            DogImage dogImage;
-            int count = 0;
+            DogImage dogImage = new DogImage();
 
-            //Do while parce que l'API renvoie aussi des vidéos et on en veut pas :p
-            do {
+            int count = 0;
+            boolean isMatch = false;
+
+            // while parce que l'API renvoie aussi des vidéos et on en veut pas :p
+            while (count++ < 20 && !isMatch) {
                 try {
                     dogImage = httpService.sendGetRequest(dogImageApiRandomUrl, DogImage.class, null);
+                    isMatch = dogImage.getUrl().matches(imagePattern);
+
                     log.warn("dogImage  "+dogImage.getUrl());
-                } catch (ExternalAPIException e) {
-                    e.printStackTrace();
+                    if(!isMatch) Thread.sleep(1500);
+
+                } catch (ExternalAPIException | InterruptedException e) {
+                    log.error(e.toString());
                     return "";
                 }
             }
-            while (count++ < 20 && !dogImage.getUrl().matches(imagePattern));
 
             return dogImage.getUrl();
     }

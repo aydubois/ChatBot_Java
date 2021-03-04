@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class DogImage implements Serializable {
 
     private Integer fileSizeBytes;
-    private String url;
+    private String url = "";
 
     public Integer getFileSizeBytes() {
         return fileSizeBytes;

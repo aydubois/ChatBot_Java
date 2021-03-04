@@ -8,6 +8,9 @@ import chatrabia.util.Util;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class MessageService extends MyRunnable {
@@ -92,8 +95,10 @@ public class MessageService extends MyRunnable {
             }
         }
         if(msg.getBotMessage().size() == 0){
-            String kaamelottCitation = kaamelottService.get();
-            msg.addBotMessage(kaamelottCitation);
+            KaamelottService.Citation citation = kaamelottService.getKaamelott();
+
+            if(!"".equals(citation.getCitation())) msg.addBotMessage(citation.getCitation());
+            if(!"".equals(citation.getPersonnage())) msg.setBotName(citation.getPersonnage());
         }
 
         return msg;
