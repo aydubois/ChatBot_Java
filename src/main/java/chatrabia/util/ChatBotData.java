@@ -1,6 +1,7 @@
 package chatrabia.util;
 
 import chatrabia.bot.AssocPatternResponse;
+import chatrabia.bot.AssocWordCitation;
 
 import java.util.ArrayList;
 
@@ -8,17 +9,19 @@ public class ChatBotData {
     private static volatile ChatBotData instance = null;
     private ArrayList<AssocPatternResponse> patternResponse = new ArrayList<>();
     private ArrayList<String> services = new ArrayList<>();
+    private ArrayList<AssocWordCitation> assocCitations = new ArrayList<>();
 
 
     private ChatBotData() {
-        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/bot/config.xml").addXmlService("fichiers/bot/service.xml").build();
+        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/bot/config.xml").addXmlService("fichiers/bot/service.xml").
+                addXmlCitation("fichiers/bot/fortuneAPI.xml").build();
         patternResponse.addAll(parseXml.getPatternResponse());
         services.addAll(parseXml.getServices());
+        assocCitations.addAll(parseXml.getAssocCitations());
 
     }
 
-    // todo: si tu fais un getInstance() comme pour un singleton, pourquoi faire un new dedans et pas dans  private static volatile ChatBotData instance = null;
-    //    pourquoi le synchronized ici (je n'ai pas encore regarder autour :p)
+
     public static ChatBotData getInstance() {
         if (instance == null) {
             synchronized (ChatBotData.class) {
@@ -35,6 +38,9 @@ public class ChatBotData {
     // pour proteger le get, il suffit de return un new arrayList ici (car String est immuable)
     public ArrayList<String> getServices() {
         return services;
+    }
+    public ArrayList<AssocWordCitation> getAssocCitations() {
+        return assocCitations;
     }
 
 }

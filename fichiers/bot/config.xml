@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Config>
     <Category>
-        <pattern>(putain)|(connard)|(encul.*)|( bite )</pattern>
+        <pattern>(putain)|(connard)|(encul.*)|( bite )|(batard)</pattern>
         <template>Yob tvoyu mat' ! Modak ... </template>
         <template>Podonok </template>
         <template>Idi nia houille </template>
@@ -14,27 +14,27 @@
         <template>Baisse d'un ton</template>
     </Category>
     <Category>
-        <pattern>([B|b]onjour)|([S|s][a]*l[u]*t)|([H|h]ey)|([C|c]oucou)|([H|h]ello)|(Yo)|(yo)</pattern>
+        <pattern>([Bb]onjour)|([Ss][a]*l[u]*t)|([Hh]ey)|([Cc]oucou)|([Hh]ello)|(Yo)|(yo)</pattern>
         <template>Bonjour à toi jeune sacripan !</template>
         <template>Salut !</template>
         <template>Yo !</template>
     </Category>
     <Category>
-        <pattern>(ton [a|â]ge)|(tu.*[a|â]ge)</pattern>
+        <pattern>(ton [aâ]ge)|(tu.*[aâ]ge)</pattern>
         <template>J'ai 3 fois l'âge de ton père divisé par l'âge de ton chat multiplié par le nombre de touches sur ton clavier</template>
         <template>Demande à ta mère ;)</template>
         <template>Tu veux pas savoir</template>
         <template>42</template>
     </Category>
     <Category>
-        <pattern>([B|b]ye)|([A|a]u revoir)|([A|a] plus)</pattern>
+        <pattern>([Bb]ye)|([Aa]u revoir)|([Aa] plus)</pattern>
         <template>A la revoyure !</template>
         <template>A plus.</template>
         <template>Tu pars déjà, c'est triste.</template>
         <template>Enfin ...</template>
     </Category>
     <Category>
-        <pattern>[O|o]ù.*?$</pattern>
+        <pattern>[Oo]ù.*?$</pattern>
         <template>Dans ton cul</template>
         <template>Ici et là-bas</template>
         <template>Chez ta mère</template>
@@ -44,10 +44,20 @@
         <template>42 - non binaire - dtc</template>
     </Category>
     <Category>
-        <pattern>(^[J|j]e t'aime$)|(jtm)</pattern>
+        <pattern>sens.*vie</pattern>
+        <template>42</template>
+    </Category>
+    <Category>
+        <pattern>(^[Jj]e t'aime$)|(jtm)</pattern>
         <template>Comme un fou, comme un soldat ? #NOP</template>
         <template>pfff ...</template>
         <template>...</template>
         <template>#NOP</template>
+    </Category>
+    <Category>
+        <pattern>[Tt]est</pattern>
+        <template>Info Coronavirus COVID-19 - Tester - Alerter - Protéger ... (Dédicace à Tommy)</template>
+        <template>Pour votre santé, évitez de manger trop gras, trop sucré, trop salé (Dédicace à Tommy)</template>
+        <template>La gonorrhée est une infection causée par la bactérie Neisseria Gonorrhea (gonocoque), transmise pendant les rapports sexuels non protégés</template>
     </Category>
 </Config>

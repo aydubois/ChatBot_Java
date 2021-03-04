@@ -64,6 +64,7 @@ public class HttpService {
                 throw new ExternalAPIException(String.format("Erreur lors de l'exécution de la requête GET %s code HTTP %s", url, statusCode.value()));
             }
         } catch (Exception ex) {
+            System.out.println(ex.toString());
             throw new ExternalAPIException(String.format("Erreur lors de l'exécution de la requête %s", url));
         }
     }
