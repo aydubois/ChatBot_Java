@@ -8,9 +8,6 @@ import chatrabia.util.Util;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class MessageService extends MyRunnable {
@@ -24,13 +21,14 @@ public class MessageService extends MyRunnable {
     private final DogImageService dogImageService;
     private final InsulteRusseService insulteRusseService;
     private final MiamService miamService;
+    private final PenduService penduService;
 
     private final ChatBotData cbd = ChatBotData.getInstance();
 
     public MessageService(ShifumiService shifumiService,InsulteRusseService insulteRusseService,
                           RegexService regexService, CitationService citationService, KaamelottService kaamelottService,
                           AleatoireService aleatoireService, ChuckNorrisService chuckNorrisService,
-                          DogImageService dogImageService, MiamService miamService){
+                          DogImageService dogImageService, MiamService miamService, PenduService penduService){
         this.shifumiService = shifumiService;
         this.regexService = regexService;
         this.citationService = citationService;
@@ -40,6 +38,7 @@ public class MessageService extends MyRunnable {
         this.dogImageService = dogImageService;
         this.insulteRusseService = insulteRusseService;
         this.miamService = miamService;
+        this.penduService = penduService;
     }
 
     public Message getMessageUser(String message, String user){
@@ -53,9 +52,11 @@ public class MessageService extends MyRunnable {
                 msg.addBotMessage(aleatoire);
             }else{
                 String[] aleatoire = aleatoireService.getAleatoireJoieCode();
-                aleatoire[0] = regexService.deleteAntiSlashN(aleatoire[0]);
-                msg.addBotMessage(aleatoire[0]);
-                msg.addBotMessage(aleatoire[1]);
+                if(aleatoire != null && aleatoire.length >= 2){
+                    aleatoire[0] = regexService.deleteAntiSlashN(aleatoire[0]);
+                    msg.addBotMessage(aleatoire[0]);
+                    msg.addBotMessage(aleatoire[1]);
+                }
             }
             msg.setUserMessage("");
         }
@@ -78,17 +79,22 @@ public class MessageService extends MyRunnable {
             msg.addBotMessage(insulte);
 
         } else {
+            Thread threadPendu = new Thread(penduService.createRunnable(msg, getServiceActivated()));
+            threadPendu.start();
 
-            Thread threadShifumi = new Thread(shifumiService.createRunnable(msg));
+            Thread threadShifumi = new Thread(shifumiService.createRunnable(msg, getServiceActivated()));
             threadShifumi.start();
+
             Thread threadRegex = new Thread(this.createRunnable(msg));
             threadRegex.start();
+
             Thread threadCitation = new Thread(citationService.createRunnable(msg));
             threadCitation.start();
             try {
                 threadShifumi.join();
                 threadRegex.join();
                 threadCitation.join();
+                threadPendu.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 System.out.println("thread interrupted");
@@ -105,9 +111,12 @@ public class MessageService extends MyRunnable {
 
     }
 
-    private String getServiceActivated(){
+    public String getServiceActivated(){
         if (shifumiService.getActivated()){
             return "Shifumi";
+        }
+        if(penduService.getActivated()){
+            return "pendu";
         }
         return null;
     }

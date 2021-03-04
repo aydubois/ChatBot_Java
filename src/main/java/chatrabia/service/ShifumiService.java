@@ -7,7 +7,7 @@ import chatrabia.util.Util;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ShifumiService extends MyRunnable {
+public class ShifumiService {
 
     private final RegexService regexService;
     private Shifumi shifumi = new Shifumi();
@@ -19,8 +19,10 @@ public class ShifumiService extends MyRunnable {
         this.regexService = regexService;
     }
 
-    @Override
-    protected void myRun(Message message){
+    public Runnable createRunnable( Message message, String serviceActivated){
+        return () -> myRun(message, serviceActivated);
+    }
+    protected void myRun(Message message, String serviceActivated){
         String messageUser = message.getUserMessage();
         // Si pas activé && messageUser != Shifumi -> on passe notre chemin, Thread terminé
         if(!checkIsActivated() && !checkStarting(messageUser)){
@@ -28,8 +30,10 @@ public class ShifumiService extends MyRunnable {
         }else
         // Si pas activé && messageUser == Shifumi -> let's go
         if(!checkIsActivated() && checkStarting(messageUser)){
-            message.addBotMessage(startShifumi());
-            Thread.currentThread().interrupt();
+            if (serviceActivated == null) {
+                message.addBotMessage(startShifumi());
+                Thread.currentThread().interrupt();
+            }
         }else {
             //Si activé -> verif choix utilisateur
             String choixUser = checkResponseUser(messageUser);

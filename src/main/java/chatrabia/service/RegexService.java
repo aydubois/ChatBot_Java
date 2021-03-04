@@ -83,6 +83,7 @@ public class RegexService {
 
     public String deleteAntiSlashN(String sentence){
         if(sentence != null){
+            sentence = sentence.replaceAll("&quote;","");
             sentence = sentence.replaceAll("&rsquo;","'");
             sentence =  sentence.replaceAll("\\\\[a-z]"," ");
         }
