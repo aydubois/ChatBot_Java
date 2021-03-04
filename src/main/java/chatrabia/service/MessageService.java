@@ -1,52 +1,46 @@
 package chatrabia.service;
 
 import chatrabia.bot.AssocPatternResponse;
-import chatrabia.domain.Kaamelott;
 import chatrabia.domain.Message;
 import chatrabia.util.ChatBotData;
-import chatrabia.util.Matching;
+import chatrabia.util.MyRunnable;
 import chatrabia.util.Util;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
-public class MessageService extends MyRunnable{
+public class MessageService extends MyRunnable {
 
     private final ShifumiService shifumiService;
-    private final JokeService jokeService;
     private final RegexService regexService;
     private final CitationService citationService;
     private final KaamelottService kaamelottService;
     private final AleatoireService aleatoireService;
     private final ChuckNorrisService chuckNorrisService;
     private final DogImageService dogImageService;
+    private final InsulteRusseService insulteRusseService;
 
     private final ChatBotData cbd = ChatBotData.getInstance();
 
-    public MessageService(ShifumiService shifumiService, JokeService jokeService, RegexService regexService, CitationService citationService, KaamelottService kaamelottService, AleatoireService aleatoireService, ChuckNorrisService chuckNorrisService, DogImageService dogImageService){
+    public MessageService(ShifumiService shifumiService,InsulteRusseService insulteRusseService, RegexService regexService, CitationService citationService, KaamelottService kaamelottService, AleatoireService aleatoireService, ChuckNorrisService chuckNorrisService, DogImageService dogImageService){
         this.shifumiService = shifumiService;
-        this.jokeService = jokeService;
         this.regexService = regexService;
         this.citationService = citationService;
         this.kaamelottService = kaamelottService;
         this.aleatoireService = aleatoireService;
         this.chuckNorrisService = chuckNorrisService;
         this.dogImageService = dogImageService;
+        this.insulteRusseService = insulteRusseService;
     }
 
     public Message getMessageUser(String message, String user){
         Message msg = this.createMessage(user, message);
-        String multiService = this.checkMultiServiceActivated(msg);
-        System.out.println("MULTISERVICE " +multiService);
-        if(multiService != null){
-            getResponseMultiService(msg, multiService);
-        }else if(message.equals("unevachedansunpresquimangedesfourmisarcenciel")){
+
+        if(message.equals("unevachedansunpresquimangedesfourmisarcenciel")){
             int randomInt = Util.getRandom(0,10);
             if(randomInt <8){
-                String aleatoire = aleatoireService.getAleatoire();
+                String aleatoire = aleatoireService.get();
                 msg.addBotMessage(aleatoire);
             }else{
                 String[] aleatoire = aleatoireService.getAleatoireJoieCode();
@@ -55,27 +49,30 @@ public class MessageService extends MyRunnable{
             }
             msg.setUserMessage("");
         }
-        else if(message.matches(ChuckNorrisService.getPattern())){
-            String chuckMessage = chuckNorrisService.getChuckNorrisRandomJoke();
+        else if(message.matches(chuckNorrisService.getPattern())){
+            String chuckMessage = chuckNorrisService.get();
             msg.addBotMessage(chuckMessage);
 
-        } else if(message.matches(DogImageService.getPattern())) {
-            String dogUrl = dogImageService.getRandomDogImage();
+        } else if(message.matches(dogImageService.getPattern())) {
+            String dogUrl = dogImageService.get();
             msg.addBotMessage(dogUrl);
+
+        }else if(message.matches(insulteRusseService.getPattern())) {
+            String[] arrayEmoji = {"\uD83D\uDD95", "\uD83D\uDCA3","\uD83D\uDE21","\uD83D\uDD2B" };
+            String emoji = arrayEmoji[Util.getRandom(0,arrayEmoji.length-1)];
+            String insulte = insulteRusseService.get()+" "+emoji;
+            msg.addBotMessage(insulte);
 
         } else {
 
             Thread threadShifumi = new Thread(shifumiService.createRunnable(msg));
             threadShifumi.start();
-            Thread threadJoke = new Thread(jokeService.createRunnable(msg));
-            threadJoke.start();
             Thread threadRegex = new Thread(this.createRunnable(msg));
             threadRegex.start();
             Thread threadCitation = new Thread(citationService.createRunnable(msg));
             threadCitation.start();
             try {
                 threadShifumi.join();
-                threadJoke.join();
                 threadRegex.join();
                 threadCitation.join();
             } catch (InterruptedException e) {
@@ -84,7 +81,7 @@ public class MessageService extends MyRunnable{
             }
         }
         if(msg.getBotMessage().size() == 0){
-            String kaamelottCitation = kaamelottService.getKaamelott();
+            String kaamelottCitation = kaamelottService.get();
             msg.addBotMessage(kaamelottCitation);
         }
 
@@ -92,42 +89,11 @@ public class MessageService extends MyRunnable{
 
     }
 
-    private String checkMultiServiceActivated(Message message){
-        String serviceActivated = getServiceActivated();
-        System.out.println("Service activé ==>" +serviceActivated);
-        if(serviceActivated == null){
-            return null;
-        }
-        String patternRegex = regexService.checkMessageWithServices(message.getUserMessage());
-        System.out.println("PATTERN REGEX  "+patternRegex);
-        if(patternRegex == null){
-            return null;
-        }
-        if(regexService.check2Words(serviceActivated, patternRegex)){
-            return null;
-        }
-        return patternRegex;
-    }
     private String getServiceActivated(){
-        if(jokeService.getActivated()){
-            return "Joke";
-        }else if (shifumiService.getActivated()){
+        if (shifumiService.getActivated()){
             return "Shifumi";
         }
         return null;
-    }
-    private void getResponseMultiService(Message message, String pattern){
-        if(getServiceActivated().equals("Shifumi")){
-            if(pattern.equals("([B|b]lague)|([J|j]oke)")){
-                message.addBotMessage("Désolé, mais je ne fais pas de blague en milieu de partie de Shifumi. Tu choisis quoi : Pierre, Feuille ou Ciseaux ?");
-            }
-        }
-        if(getServiceActivated().equals("Joke")){
-            if(pattern.equals("[S|s]h[i|y]fum[i|y]")){
-                message.addBotMessage("Tu n'as pas répondu à ma question :'(");
-                jokeService.setActivated(false);
-            }
-        }
     }
 
     @Override

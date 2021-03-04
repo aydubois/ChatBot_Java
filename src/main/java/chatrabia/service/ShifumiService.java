@@ -2,14 +2,12 @@ package chatrabia.service;
 
 import chatrabia.domain.Message;
 import chatrabia.domain.Shifumi;
-import chatrabia.util.Matching;
+import chatrabia.util.MyRunnable;
 import chatrabia.util.Util;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
-
 @Service
-public class ShifumiService extends MyRunnable{
+public class ShifumiService extends MyRunnable {
 
     private final RegexService regexService;
     private Shifumi shifumi = new Shifumi();

@@ -4,6 +4,7 @@ import chatrabia.bot.AssocWordCitation;
 import chatrabia.domain.Message;
 import chatrabia.exception.ExternalAPIException;
 import chatrabia.util.ChatBotData;
+import chatrabia.util.MyRunnable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

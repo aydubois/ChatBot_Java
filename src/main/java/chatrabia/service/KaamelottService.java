@@ -1,20 +1,18 @@
 package chatrabia.service;
 
-import chatrabia.domain.ChuckNorris;
 import chatrabia.domain.Kaamelott;
 import chatrabia.exception.ExternalAPIException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KaamelottService {
-    private HttpService httpService;
-    private static final String kaamelottAPI = "https://kaamelott.chaudie.re/api/random";
-    public KaamelottService(@Qualifier("httpService")HttpService httpService){this.httpService = httpService;}
+public class KaamelottService extends GetHttp {
+    private final String urlAPI = "https://kaamelott.chaudie.re/api/random";
+    public KaamelottService(@Qualifier("httpService")HttpService httpService){super(httpService);}
 
-    public String getKaamelott() {
+    public String get() {
         try {
-            Kaamelott kaamelott = httpService.sendGetRequest(kaamelottAPI, Kaamelott.class, null);
+            Kaamelott kaamelott = httpService.sendGetRequest(urlAPI, Kaamelott.class, null);
 
             return kaamelott.getCitation().getCitation();
 

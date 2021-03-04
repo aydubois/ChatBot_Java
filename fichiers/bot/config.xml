@@ -1,13 +1,6 @@
 <?xml version="1.0"?>
 <Config>
     <Category>
-        <pattern>(putain)|(connard)|(encul.*)|( bite )|(batard)</pattern>
-        <template>Yob tvoyu mat' ! Modak ... 🖕</template>
-        <template>Podonok 💣</template>
-        <template>Idi nia houille 😡</template>
-        <template>Ti govniouk 🔫</template>
-    </Category>
-    <Category>
         <pattern>[^a-z][A-Z]+</pattern>
         <template>Pas la peine de crier, de toute façon j'ai pas d'oreille ... 🙉</template>
         <template>Je ne répond pas aux hurleurs 🙊</template>
@@ -20,7 +13,7 @@
         <template>Yo !</template>
     </Category>
     <Category>
-        <pattern>(ton [aâ]ge)|(tu.*[aâ]ge)</pattern>
+        <pattern>(ton [aâ]ge)|(tu.*[aâ]ge)|(.*[aâ]ge.*tu)</pattern>
         <template>J'ai 3 fois l'âge de ton père divisé par l'âge de ton chat multiplié par le nombre de touches sur ton clavier</template>
         <template>Demande à ta mère ;)</template>
         <template>Tu veux pas savoir</template>

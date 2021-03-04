@@ -8,25 +8,26 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DogImageService {
+public class DogImageService extends GetHttp {
 
     private static Logger log = LogManager.getRootLogger();
 
     private static final String pattern = "[Dd]og|[Cc]hien|[Ww]oof|[Ww]af";
     private static final String imagePattern = ".*\\.(jpg|jpeg|png|gif).*";
 
-    private HttpService httpService;
     private static final String dogImageApiRandomUrl = "https://random.dog/woof.json";
 
     public DogImageService(@Qualifier("httpService") HttpService httpService) {
-        this.httpService = httpService;
+        super(httpService);
     }
 
-    public String getRandomDogImage() {
+    @Override
+    public String get() {
 
             DogImage dogImage;
             int count = 0;
 
+            //Do while parce que l'API renvoie aussi des vidéos et on en veut pas :p
             do {
                 try {
                     dogImage = httpService.sendGetRequest(dogImageApiRandomUrl, DogImage.class, null);

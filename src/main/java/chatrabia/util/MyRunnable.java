@@ -1,8 +1,8 @@
-package chatrabia.service;
+package chatrabia.util;
 
 import chatrabia.domain.Message;
 
-abstract class MyRunnable {
+public abstract class MyRunnable {
     /**
      * Permet de créer un Runnable avec un paramètre
      * @param message
