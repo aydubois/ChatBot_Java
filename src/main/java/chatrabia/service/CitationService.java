@@ -4,13 +4,14 @@ import chatrabia.bot.AssocWordCitation;
 import chatrabia.domain.Message;
 import chatrabia.exception.ExternalAPIException;
 import chatrabia.util.ChatBotData;
+import chatrabia.util.MyRunnable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
-public class CitationService {
+public class CitationService extends MyRunnable{
     private boolean isActivated = false;
     private HttpService httpService;
     private RegexService regexService;
@@ -34,11 +35,9 @@ public class CitationService {
         }
         return "";
     }
-    public Runnable createRunnable( Message message){
-        // magic again xD
-        return () -> myRun(message);
-    }
-    public void myRun(Message message){
+    
+    @Override
+    protected void myRun(Message message){
         AssocWordCitation assocWord = regexService.checkMessageWithFortune(message.getUserMessage());
         if(assocWord == null){
             Thread.currentThread().interrupt();

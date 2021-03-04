@@ -2,24 +2,21 @@ package chatrabia.service;
 
 import chatrabia.domain.ChuckNorris;
 import chatrabia.exception.ExternalAPIException;
-import chatrabia.service.HttpService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChuckNorrisService {
-    private static final String pattern = ".*[Cc]huck.*|.*CHUCK.*|.*[Nn]orris.*";
-    private HttpService httpService;
-    private static final String chuckApiRandomUrl = "http://api.icndb.com/jokes/random";
+public class ChuckNorrisService extends GetHttp {
+    private static final String pattern = ".*[Cc]huck.*|.*CHUCK.*|.*[Nn]orris.*|.*[Bb]lagu.*|.*[Jj]oke.*";
+    private static final String urlAPI = "http://api.icndb.com/jokes/random";
 
     public ChuckNorrisService(@Qualifier("httpService") HttpService httpService) {
-        this.httpService = httpService;
+        super(httpService);
     }
 
-    public String getChuckNorrisRandomJoke() {
+    public String get() {
         try {
-            ChuckNorris chuckNorris = httpService.sendGetRequest(chuckApiRandomUrl, ChuckNorris.class, null);
-
+            ChuckNorris chuckNorris = httpService.sendGetRequest(urlAPI, ChuckNorris.class, null);
             return chuckNorris.getJoke();
 
         } catch (ExternalAPIException e) {
@@ -28,9 +25,10 @@ public class ChuckNorrisService {
         return "";
     }
 
+    //Pas utilisé pour le moment
     public String getChuckNorrisRandomJokeByName(String name) {
         try {
-            ChuckNorris chuckNorris = httpService.sendGetRequest(chuckApiRandomUrl+"?firstName="+name, ChuckNorris.class, null);
+            ChuckNorris chuckNorris = httpService.sendGetRequest(urlAPI+"?firstName="+name, ChuckNorris.class, null);
 
             return chuckNorris.getJoke();
 

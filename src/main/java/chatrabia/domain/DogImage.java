@@ -1,6 +1,8 @@
 package chatrabia.domain;
 
-public class DogImage {
+import java.io.Serializable;
+
+public class DogImage implements Serializable {
 
     private Integer fileSizeBytes;
     private String url = "";

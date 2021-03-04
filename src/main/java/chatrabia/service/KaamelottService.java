@@ -1,6 +1,5 @@
 package chatrabia.service;
 
-import chatrabia.domain.ChuckNorris;
 import chatrabia.domain.Kaamelott;
 import chatrabia.exception.ExternalAPIException;
 import org.springframework.beans.factory.annotation.Qualifier;
