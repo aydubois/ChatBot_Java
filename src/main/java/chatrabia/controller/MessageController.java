@@ -59,4 +59,7 @@ public class MessageController {
     // https://jokeapi.dev/
 
     // https://icanhazdadjoke.com/api#fetch-a-random-dad-joke
+
+//    https://github.com/sin0light/api-kaamelott (modifié)
+//    https://kaamelott.chaudie.re/api/random
 }
