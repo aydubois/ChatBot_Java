@@ -1,6 +1,7 @@
 package chatrabia.service;
 
 import chatrabia.bot.AssocPatternResponse;
+import chatrabia.domain.Kaamelott;
 import chatrabia.domain.Message;
 import chatrabia.util.ChatBotData;
 import chatrabia.util.Matching;
@@ -17,12 +18,19 @@ public class MessageService {
     private final ShifumiService shifumiService;
     private final JokeService jokeService;
     private final RegexService regexService;
+    private final CitationService citationService;
+    private final KaamelottService kaamelottService;
+    private final AleatoireService aleatoireService;
+
     private final ChatBotData cbd = ChatBotData.getInstance();
 
-    public MessageService(ShifumiService shifumiService, JokeService jokeService, RegexService regexService){
+    public MessageService(ShifumiService shifumiService, JokeService jokeService, RegexService regexService, CitationService citationService, KaamelottService kaamelottService, AleatoireService aleatoireService){
         this.shifumiService = shifumiService;
         this.jokeService = jokeService;
         this.regexService = regexService;
+        this.citationService = citationService;
+        this.kaamelottService = kaamelottService;
+        this.aleatoireService = aleatoireService;
     }
 
     public Message getMessageUser(String message, String user){
@@ -31,6 +39,10 @@ public class MessageService {
         System.out.println("MULTISERVICE " +multiService);
         if(multiService != null){
             getResponseMultiService(msg, multiService);
+        }else if(message.equals("unevachedansunpresquimangedesfourmisarcenciel")){
+            String aleatoire = aleatoireService.getAleatoire();
+            msg.addBotMessage(aleatoire);
+            msg.setUserMessage("");
         }else{
 
             Thread threadShifumi = new Thread(shifumiService.createRunnable(msg));
@@ -39,17 +51,21 @@ public class MessageService {
             threadJoke.start();
             Thread threadRegex = new Thread(this.createRunnable(msg));
             threadRegex.start();
+            Thread threadCitation = new Thread(citationService.createRunnable(msg));
+            threadCitation.start();
             try {
                 threadShifumi.join();
                 threadJoke.join();
                 threadRegex.join();
+                threadCitation.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 System.out.println("thread interrupted");
             }
         }
         if(msg.getBotMessage().size() == 0){
-            msg.addBotMessage("I don't understand. Oui, je suis bilingue, mais toi tu parles bizarrement.");
+            String kaamelottCitation = kaamelottService.getKaamelott();
+            msg.addBotMessage(kaamelottCitation);
         }
 
         return msg;
@@ -57,12 +73,7 @@ public class MessageService {
     }
 
     public Runnable createRunnable( Message message){
-        Runnable aRunnable = new Runnable(){
-            public void run(){
-                myRun(message);
-            }
-        };
-        return aRunnable;
+        return () -> myRun(message);
     }
     private String checkMultiServiceActivated(Message message){
         String serviceActivated = getServiceActivated();
