@@ -9,23 +9,20 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Array;
 
 @Service
-public class ShifumiService{
+public class ShifumiService extends MyRunnable{
 
     private final RegexService regexService;
     private Shifumi shifumi = new Shifumi();
     private String[] response = {"Pierre", "Feuille", "Ciseaux", "Pierre", "Feuille", "Ciseaux", "Puit"}; // diminue les chances d'avoir puit xD
     private boolean isActivated = false;
 
-    public Runnable createRunnable(Message message){
-        // pil: magic xD
-        return () -> myRun(message);
-    }
 
     public ShifumiService(RegexService regexService){
         this.regexService = regexService;
     }
 
-    private void myRun(Message message){
+    @Override
+    protected void myRun(Message message){
         String messageUser = message.getUserMessage();
         // Si pas activé && messageUser != Shifumi -> on passe notre chemin, Thread terminé
         if(!checkIsActivated() && !checkStarting(messageUser)){
@@ -52,6 +49,7 @@ public class ShifumiService{
             } else {
 
                 //messageUser ok -> du coup choix du bot, setScore
+                message.setOption("shifumi");
                 String choixBot = randomResponse();
                 message.addBotMessage(choixBot);
                 if(choixBot.equals("Puit"))

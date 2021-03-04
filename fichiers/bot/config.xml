@@ -14,7 +14,7 @@
         <template>Baisse d'un ton</template>
     </Category>
     <Category>
-        <pattern>([Bb]onjour)|([Ss][a]*l[u]*t)|([Hh]ey)|([Cc]oucou)|([Hh]ello)|(Yo)|(yo)</pattern>
+        <pattern>([Bb]onjour)|([Ss][a]*l[u]*t)|([Hh]ey)|([Cc]oucou)|([Hh]ello)|(Yo)|(yo)|([Bb]jr)</pattern>
         <template>Bonjour à toi jeune sacripan !</template>
         <template>Salut !</template>
         <template>Yo !</template>

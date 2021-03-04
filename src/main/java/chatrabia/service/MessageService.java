@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class MessageService {
+public class MessageService extends MyRunnable{
 
     private final ShifumiService shifumiService;
     private final JokeService jokeService;
@@ -40,8 +40,15 @@ public class MessageService {
         if(multiService != null){
             getResponseMultiService(msg, multiService);
         }else if(message.equals("unevachedansunpresquimangedesfourmisarcenciel")){
-            String aleatoire = aleatoireService.getAleatoire();
-            msg.addBotMessage(aleatoire);
+            int randomInt = Util.getRandom(0,10);
+            if(randomInt <8){
+                String aleatoire = aleatoireService.getAleatoire();
+                msg.addBotMessage(aleatoire);
+            }else{
+                String[] aleatoire = aleatoireService.getAleatoireJoieCode();
+                msg.addBotMessage(aleatoire[0]);
+                msg.addBotMessage(aleatoire[1]);
+            }
             msg.setUserMessage("");
         }else{
 
@@ -72,9 +79,6 @@ public class MessageService {
 
     }
 
-    public Runnable createRunnable( Message message){
-        return () -> myRun(message);
-    }
     private String checkMultiServiceActivated(Message message){
         String serviceActivated = getServiceActivated();
         System.out.println("Service activé ==>" +serviceActivated);
@@ -113,7 +117,8 @@ public class MessageService {
         }
     }
 
-    private void myRun(Message message){
+    @Override
+    protected void myRun(Message message){
         if(getServiceActivated() == null){
             String messageUser = message.getUserMessage();
             AssocPatternResponse assocPR = regexService.checkMessageWithAllData(messageUser);

@@ -5,7 +5,7 @@ import chatrabia.util.Util;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JokeService {
+public class JokeService extends MyRunnable{
     private boolean isActivated = false;
     private String favouriteJoke = null;
     private String[] allJokes = {"ChuckNorris", "Geek", "KnockKnock"};
@@ -17,12 +17,8 @@ public class JokeService {
         this.chuckNorrisService = chuckNorrisService;
     }
 
-    public Runnable createRunnable( Message message){
-        // magic again xD
-        return () -> myRun(message);
-    }
-
-    private void myRun(Message message){
+    @Override
+    protected void myRun(Message message){
         String messageUser = message.getUserMessage();
         //Si pas activé && messageUser != blague/joke -> Fin thread
         if(!isActivated && !checkStarting(messageUser)){

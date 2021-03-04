@@ -54,12 +54,10 @@ public class MessageController {
     //              https://geek-jokes.sameerkumar.website/api?format=json -> json
 
     // Cocktail api : https://www.thecocktaildb.com/api.php
-    // random dog picture : https://random.dog/woof.json
 
     // https://jokeapi.dev/
 
     // https://icanhazdadjoke.com/api#fetch-a-random-dad-joke
 
-//    https://github.com/sin0light/api-kaamelott (modifié)
-//    https://kaamelott.chaudie.re/api/random
+    // random dog picture : https://random.dog/woof.json
 }

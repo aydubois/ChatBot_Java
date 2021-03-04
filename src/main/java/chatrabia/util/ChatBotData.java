@@ -2,6 +2,7 @@ package chatrabia.util;
 
 import chatrabia.bot.AssocPatternResponse;
 import chatrabia.bot.AssocWordCitation;
+import chatrabia.service.*;
 
 import java.util.ArrayList;
 
@@ -10,7 +11,6 @@ public class ChatBotData {
     private ArrayList<AssocPatternResponse> patternResponse = new ArrayList<>();
     private ArrayList<String> services = new ArrayList<>();
     private ArrayList<AssocWordCitation> assocCitations = new ArrayList<>();
-
 
     private ChatBotData() {
         ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/bot/config.xml").addXmlService("fichiers/bot/service.xml").
@@ -23,8 +23,8 @@ public class ChatBotData {
 
 
     public static ChatBotData getInstance() {
-        if (instance == null) {
-            synchronized (ChatBotData.class) {
+        synchronized (ChatBotData.class) {
+            if (instance == null) {
                 instance = new ChatBotData();
             }
         }
