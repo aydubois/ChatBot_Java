@@ -10,17 +10,15 @@ import java.lang.reflect.Array;
 
 @Service
 public class ShifumiService{
+
     private final RegexService regexService;
     private Shifumi shifumi = new Shifumi();
     private String[] response = {"Pierre", "Feuille", "Ciseaux", "Pierre", "Feuille", "Ciseaux", "Puit"}; // diminue les chances d'avoir puit xD
     private boolean isActivated = false;
-    public Runnable createRunnable( Message message){
-        Runnable aRunnable = new Runnable(){
-            public void run(){
-                    myRun(message);
-            }
-        };
-        return aRunnable;
+
+    public Runnable createRunnable(Message message){
+        // pil: magic xD
+        return () -> myRun(message);
     }
 
     public ShifumiService(RegexService regexService){

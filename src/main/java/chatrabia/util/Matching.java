@@ -1,12 +1,16 @@
 package chatrabia.util;
 
+// todo: faut que tu m'expliques cette classe stp (mes pauvres petits neurones sont fatigués :p )
 public class Matching {
+
     public static int lock_match(String s, String t) {
         int totalw = word_count(s);
         int total = 100;
         int perw = total / totalw;
         int gotperw = 0;
-        if (!s.equals(t)) {
+
+        if (s != null && !s.equals(t)) {
+
             for (int i = 1; i <= totalw; i++) {
                 if (simple_match(split_string(s, i), t) == 1) {
                     gotperw = ((perw * (total - 10)) / total) + gotperw;
@@ -24,14 +28,16 @@ public class Matching {
         return gotperw;
     }
 
+    // todo: return boolean instead ?
     public static int anywhere_match(String s, String t) {
         int x = 0;
-        if (t.contains(s)) {
+        if (t != null && t.contains(s)) {
             x = 1;
         }
         return x;
     }
 
+    // todo: return boolean instead ? JavaDoc :p ?
     public static int front_full_match(String s, String t) {
         int x = 0;
         String tempt;
@@ -55,6 +61,7 @@ public class Matching {
         return x;
     }
 
+    // todo: return boolean instead ?
     public static int simple_match(String s, String t) {
         int x = 0;
         String tempt;
@@ -99,6 +106,7 @@ public class Matching {
         //declaring a temporary new source char array
         char[] ns = new char[3];
         //check if source char array has more then 3 characters//
+        // todo: if slen >= 3 à la place ?
         if (slen < 3) {
         } else {
             for (int i = 0; i < combs; i++) {
@@ -119,29 +127,32 @@ public class Matching {
      * @param s
      * @param t
      * @return
-     */
+     */ // todo: return boolean instead ?
     public static int  cross_full_match(char[] s, char[] t) {
+        if(s == null || t == null) throw new IllegalArgumentException("Matching -> cross_full_match() - un param est null");
+
         int z = t.length - s.length;
         int x = 0;
         if (s.length > t.length) {
             return x;
-        } else {
-            for (int i = 0; i <= z; i++) {
-                for (int j = 0; j <= (s.length - 1); j++) {
-                    if (s[j] == t[j + i]) {
-                        // x=1 if any charecer matches
-                        x = 1;
-                    } else {
-                        // if x=0 mean an character do not matches and loop break out
-                        x = 0;
-                        break;
-                    }
-                }
-                if (x == 1) {
+        }
+
+        for (int i = 0; i <= z; i++) {
+            for (int j = 0; j <= (s.length - 1); j++) {
+                if (s[j] == t[j + i]) {
+                    // x=1 if any charecer matches
+                    x = 1;
+                } else {
+                    // if x=0 mean an character do not matches and loop break out
+                    x = 0;
                     break;
                 }
             }
+            if (x == 1) {
+                break;
+            }
         }
+
         return x;
     }
 
@@ -149,7 +160,7 @@ public class Matching {
 
         int index;
         String temp;
-        temp = s;
+        temp = s; // todo: pourquoi copier la ref de "s" ?
         String temp2 = null;
 
         int temp3 = 0;
@@ -172,22 +183,23 @@ public class Matching {
         int x = 1;
         int c;
         s = s.trim();
-        if (s.isEmpty()) {
-            x = 0;
-        } else {
-            if (s.contains(" ")) {
-                for (;;) {
-                    x++;
-                    c = s.indexOf(" ");
-                    s = s.substring(c);
-                    s = s.trim();
-                    if (s.contains(" ")) {
-                    } else {
-                        break;
-                    }
+        if (s.isEmpty()) return 0;
+
+
+        if (s.contains(" ")) {
+            // todo: un while(true) camouflé :p ? pourquoi pas faire un while(s.contains(" ")) ?
+            for (;;) {
+                x++;
+                c = s.indexOf(" ");
+                s = s.substring(c);
+                s = s.trim();
+                if (s.contains(" ")) {
+                } else {
+                    break;
                 }
             }
         }
+
         return x;
     }
 }
