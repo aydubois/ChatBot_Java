@@ -11,7 +11,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 
-
+/**
+ * <p>Builder pattern</p>
+ * <p>On evite de devoir creer de nouveaux constructeurs à chaque fois qu'on veut rajouter une propriété</p>
+ */
 class ParseXml {
     private final ArrayList<AssocPatternResponse> patternResponse;
     private final ArrayList<String> services;
@@ -21,25 +24,27 @@ class ParseXml {
             this.patternResponse = builder.patternResponse;
         }
 
+        // todo: protect ?
         public ArrayList<AssocPatternResponse> getPatternResponse() {
             return patternResponse;
         }
         public ArrayList<String> getServices(){return services;}
-        public void printList(ParseBuilder.types type){
+        public void printList(ParseBuilder.Types type){
             switch (type){
                 case PR -> patternResponse.forEach(patternResponse -> patternResponse.afficher());
 
             }
         }
+
         public static class ParseBuilder {
             private final ArrayList<AssocPatternResponse> patternResponse;
             private ArrayList<String> services;
-            public enum types {PR, SERV}
+            public enum Types {PR, SERV}
 
             ;
 
             public ParseBuilder(String filenameXmlConfig) {
-                this.patternResponse = (ArrayList<AssocPatternResponse>) parse(filenameXmlConfig, types.PR);
+                this.patternResponse = (ArrayList<AssocPatternResponse>) parse(filenameXmlConfig, Types.PR);
             }
 
             public ParseXml build() {
@@ -48,11 +53,11 @@ class ParseXml {
             }
 
             public ParseBuilder addXmlService(String filenameXmlService) {
-                this.services = (ArrayList<String>) parse(filenameXmlService, types.SERV);
+                this.services = (ArrayList<String>) parse(filenameXmlService, Types.SERV);
                 return this;
             }
 
-            private ArrayList<?> parse(String filename, types type) {
+            private ArrayList<?> parse(String filename, Types type) {
                 try {
                     File file= new File(filename);
                     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -67,7 +72,7 @@ class ParseXml {
                 return null;
             }
 
-            private ArrayList<?> switchType(types typeCla, Document doc) {
+            private ArrayList<?> switchType(Types typeCla, Document doc) {
                 switch (typeCla) {
                     case PR:
                         return getConfig(doc);

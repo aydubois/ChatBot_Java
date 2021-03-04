@@ -18,12 +18,8 @@ public class JokeService {
     }
 
     public Runnable createRunnable( Message message){
-        Runnable aRunnable = new Runnable(){
-            public void run(){
-                myRun(message);
-            }
-        };
-        return aRunnable;
+        // magic again xD
+        return () -> myRun(message);
     }
 
     private void myRun(Message message){

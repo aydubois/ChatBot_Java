@@ -17,6 +17,8 @@ public class ChatBotData {
 
     }
 
+    // todo: si tu fais un getInstance() comme pour un singleton, pourquoi faire un new dedans et pas dans  private static volatile ChatBotData instance = null;
+    //    pourquoi le synchronized ici (je n'ai pas encore regarder autour :p)
     public static ChatBotData getInstance() {
         if (instance == null) {
             synchronized (ChatBotData.class) {
@@ -26,10 +28,11 @@ public class ChatBotData {
         return instance;
     }
 
-
+    // ici proteger le get va etre un peu couteux
     public ArrayList<AssocPatternResponse> getPatternResponse() {
         return patternResponse;
     }
+    // pour proteger le get, il suffit de return un new arrayList ici (car String est immuable)
     public ArrayList<String> getServices() {
         return services;
     }
