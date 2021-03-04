@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Service
 public class AleatoireService extends GetHttp {
     private String[] prenoms = {"Ali", "Malek", "Audrey","Eslam", "Jean-Lou", "Peter","Benoist", "Antho","Jean-Philippe", "Léonie", "Matthieu", "Nadim", "Nicolas D.","Océane", "Pierre-Yves", "Rémi", "Tommy","Clément"};
-    private HttpService httpService;
+
     private static final String urlAPI = "http://slogaanizer.free.fr/sloganize.php";
     private static final String aleatoireJoieCodeAPI = "https://lesjoiesducode.fr/random";
     public AleatoireService(@Qualifier("httpService")HttpService httpService){
