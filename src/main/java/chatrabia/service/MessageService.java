@@ -20,10 +20,14 @@ public class MessageService extends MyRunnable {
     private final ChuckNorrisService chuckNorrisService;
     private final DogImageService dogImageService;
     private final InsulteRusseService insulteRusseService;
+    private final MiamService miamService;
 
     private final ChatBotData cbd = ChatBotData.getInstance();
 
-    public MessageService(ShifumiService shifumiService,InsulteRusseService insulteRusseService, RegexService regexService, CitationService citationService, KaamelottService kaamelottService, AleatoireService aleatoireService, ChuckNorrisService chuckNorrisService, DogImageService dogImageService){
+    public MessageService(ShifumiService shifumiService,InsulteRusseService insulteRusseService,
+                          RegexService regexService, CitationService citationService, KaamelottService kaamelottService,
+                          AleatoireService aleatoireService, ChuckNorrisService chuckNorrisService,
+                          DogImageService dogImageService, MiamService miamService){
         this.shifumiService = shifumiService;
         this.regexService = regexService;
         this.citationService = citationService;
@@ -32,6 +36,7 @@ public class MessageService extends MyRunnable {
         this.chuckNorrisService = chuckNorrisService;
         this.dogImageService = dogImageService;
         this.insulteRusseService = insulteRusseService;
+        this.miamService = miamService;
     }
 
     public Message getMessageUser(String message, String user){
@@ -41,9 +46,11 @@ public class MessageService extends MyRunnable {
             int randomInt = Util.getRandom(0,10);
             if(randomInt <8){
                 String aleatoire = aleatoireService.get();
+                aleatoire = regexService.deleteAntiSlashN(aleatoire);
                 msg.addBotMessage(aleatoire);
             }else{
                 String[] aleatoire = aleatoireService.getAleatoireJoieCode();
+                aleatoire[0] = regexService.deleteAntiSlashN(aleatoire[0]);
                 msg.addBotMessage(aleatoire[0]);
                 msg.addBotMessage(aleatoire[1]);
             }
@@ -51,6 +58,10 @@ public class MessageService extends MyRunnable {
         }
         else if(message.matches(chuckNorrisService.getPattern())){
             String chuckMessage = chuckNorrisService.get();
+            msg.addBotMessage(chuckMessage);
+
+        }else if(message.matches(miamService.getPattern())){
+            String chuckMessage = miamService.get();
             msg.addBotMessage(chuckMessage);
 
         } else if(message.matches(dogImageService.getPattern())) {

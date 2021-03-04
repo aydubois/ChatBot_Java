@@ -102,7 +102,7 @@ public class ShifumiService extends MyRunnable {
         if((messageUser.equals("Pierre") && responseBot.equals("Feuille"))||
                 (messageUser.equals("Ciseaux") && responseBot.equals("Pierre"))||
                 (messageUser.equals("Feuille") && responseBot.equals("Ciseaux"))||
-                (messageUser.equals("Feuille") && responseBot.equals("Puit"))
+                (!messageUser.equals("Feuille") && responseBot.equals("Puit"))
 
         ){
             shifumi.setScoreBot(shifumi.getScoreBot()+1);
@@ -114,7 +114,7 @@ public class ShifumiService extends MyRunnable {
         if((responseBot.equals("Pierre") && messageUser.equals("Feuille"))||
                 (responseBot.equals("Ciseaux") && messageUser.equals("Pierre"))||
                 (responseBot.equals("Feuille") && messageUser.equals("Ciseaux"))||
-               ( responseBot.equals("Puit") && !messageUser.equals("Feuille"))
+               ( messageUser.equals("Puit") && !responseBot.equals("Feuille"))
         ){
             shifumi.setScoreUser(shifumi.getScoreUser()+1);
             return true;

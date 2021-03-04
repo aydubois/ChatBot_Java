@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChuckNorrisService extends GetHttp {
     private static final String pattern = ".*[Cc]huck.*|.*CHUCK.*|.*[Nn]orris.*|.*[Bb]lagu.*|.*[Jj]oke.*";
-    private static final String urlAPI = "http://api.icndb.com/jokes/random";
+    private static final String urlAPI = "http://api.icndb.com/jokes/random?escape=javascript";
 
     public ChuckNorrisService(@Qualifier("httpService") HttpService httpService) {
         super(httpService);

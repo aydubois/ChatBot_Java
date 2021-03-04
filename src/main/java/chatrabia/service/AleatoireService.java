@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 @Service
 public class AleatoireService extends GetHttp {
-    private String[] prenoms = {"Ali", "Malek", "Audrey","Eslam", "Jean-Lou", "Peter","Benoist", "Antho","Jean-Philippe", "Léonie", "Matthieu", "Nadim", "Nicolas D.","Océane", "Pierre-Yves", "Rémi", "Tommy","Clément"};
+    private String[] prenoms = {"Ali", "Malek", "Audrey","Eslam", "Jean-Lou", "Peter","Benoist", "Antho","Jean-Philippe", "Léonie", "Matthieu", "Nadim", "Nicolas","Océane", "Pierre-Yves", "Rémi", "Tommy","Clément"};
 
     private static final String urlAPI = "http://slogaanizer.free.fr/sloganize.php";
     private static final String aleatoireJoieCodeAPI = "https://lesjoiesducode.fr/random";
@@ -47,10 +47,16 @@ public class AleatoireService extends GetHttp {
     //du coup on cherche la partie qu'on veut et voilà
     private String traitement(String sentence){
         String[] strings = sentence.split("<span id=\"slogan\" style=\"font-size: 34px;\">");
-        String[] sentencePresqueOK = strings[1].split("</span>");
-        String sentenceOK = sentencePresqueOK[0];
-        int randomInt = Util.getRandom(0, prenoms.length-1);
-        return sentenceOK.replace("Slogaanizer", prenoms[randomInt]);
+        if(strings.length >= 2 ){
+            String[] sentencePresqueOK = strings[1].split("</span>");
+            if(sentencePresqueOK.length >= 1){
+                String sentenceOK = sentencePresqueOK[0];
+                int randomInt = Util.getRandom(0, prenoms.length-1);
+                return sentenceOK.replace("Slogaanizer", prenoms[randomInt]);
+            }
+
+        }
+        return null;
     }
     //Idem
     private String[] traitementJoie(String sentence){
