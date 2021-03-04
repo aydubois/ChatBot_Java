@@ -21,16 +21,20 @@ public class MessageService extends MyRunnable{
     private final CitationService citationService;
     private final KaamelottService kaamelottService;
     private final AleatoireService aleatoireService;
+    private final ChuckNorrisService chuckNorrisService;
+    private final DogImageService dogImageService;
 
     private final ChatBotData cbd = ChatBotData.getInstance();
 
-    public MessageService(ShifumiService shifumiService, JokeService jokeService, RegexService regexService, CitationService citationService, KaamelottService kaamelottService, AleatoireService aleatoireService){
+    public MessageService(ShifumiService shifumiService, JokeService jokeService, RegexService regexService, CitationService citationService, KaamelottService kaamelottService, AleatoireService aleatoireService, ChuckNorrisService chuckNorrisService, DogImageService dogImageService){
         this.shifumiService = shifumiService;
         this.jokeService = jokeService;
         this.regexService = regexService;
         this.citationService = citationService;
         this.kaamelottService = kaamelottService;
         this.aleatoireService = aleatoireService;
+        this.chuckNorrisService = chuckNorrisService;
+        this.dogImageService = dogImageService;
     }
 
     public Message getMessageUser(String message, String user){
@@ -50,7 +54,16 @@ public class MessageService extends MyRunnable{
                 msg.addBotMessage(aleatoire[1]);
             }
             msg.setUserMessage("");
-        }else{
+        }
+        else if(message.matches(ChuckNorrisService.getPattern())){
+            String chuckMessage = chuckNorrisService.getChuckNorrisRandomJoke();
+            msg.addBotMessage(chuckMessage);
+
+        } else if(message.matches(DogImageService.getPattern())) {
+            String dogUrl = dogImageService.getRandomDogImage();
+            msg.addBotMessage(dogUrl);
+
+        } else {
 
             Thread threadShifumi = new Thread(shifumiService.createRunnable(msg));
             threadShifumi.start();

@@ -30,13 +30,6 @@ public class MessageController {
     @ResponseBody
     public Message getQuestion(@PathVariable String user, @PathVariable String message) {
         Message currentMessage = messageService.getMessageUser(message, user);
-    
-        // if(currentMessage.getUserMessage().matches(".*[Cc]huck.*|.*CHUCK.*")) {
-        //     String joke = chuckNorrisService.getChuckNorrisRandomJoke();
-        //     currentMessage.setBotMessage(joke);
-        // } else {
-        //     currentMessage.setBotMessage(currentMessage.getBotMessage());
-        // }
 
         return currentMessage;
     }
