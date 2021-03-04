@@ -2,16 +2,16 @@
 <Config>
     <Category>
         <pattern>(putain)|(connard)|(encul.*)|( bite )|(batard)</pattern>
-        <template>Yob tvoyu mat' ! Modak ... </template>
-        <template>Podonok </template>
-        <template>Idi nia houille </template>
-        <template>Ti govniouk</template>
+        <template>Yob tvoyu mat' ! Modak ... 🖕</template>
+        <template>Podonok 💣</template>
+        <template>Idi nia houille 😡</template>
+        <template>Ti govniouk 🔫</template>
     </Category>
     <Category>
         <pattern>[^a-z][A-Z]+</pattern>
-        <template>Pas la peine de crier, de toute façon j'ai pas d'oreille ...</template>
-        <template>Je ne répond pas aux hurleurs</template>
-        <template>Baisse d'un ton</template>
+        <template>Pas la peine de crier, de toute façon j'ai pas d'oreille ... 🙉</template>
+        <template>Je ne répond pas aux hurleurs 🙊</template>
+        <template>Baisse d'un ton 🔕</template>
     </Category>
     <Category>
         <pattern>([Bb]onjour)|([Ss][a]*l[u]*t)|([Hh]ey)|([Cc]oucou)|([Hh]ello)|(Yo)|(yo)</pattern>
@@ -34,10 +34,11 @@
         <template>Enfin ...</template>
     </Category>
     <Category>
-        <pattern>[Oo]ù.*?$</pattern>
+        <pattern>[Oo]ù.*?$|[Oo]u\s*?</pattern>
         <template>Dans ton cul</template>
         <template>Ici et là-bas</template>
         <template>Chez ta mère</template>
+        <template>🍑</template>
     </Category>
     <Category>
         <pattern>(^asv$)|(^ASV$)</pattern>
@@ -52,6 +53,7 @@
         <template>Comme un fou, comme un soldat ? #NOP</template>
         <template>pfff ...</template>
         <template>...</template>
+        <template>🥰</template>
         <template>#NOP</template>
     </Category>
     <Category>

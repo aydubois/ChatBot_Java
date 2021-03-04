@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ChuckNorrisService {
-
+    private static final String pattern = ".*[Cc]huck.*|.*CHUCK.*|.*[Nn]orris.*";
     private HttpService httpService;
     private static final String chuckApiRandomUrl = "http://api.icndb.com/jokes/random";
 
@@ -38,5 +38,9 @@ public class ChuckNorrisService {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static String getPattern() {
+        return pattern;
     }
 }
