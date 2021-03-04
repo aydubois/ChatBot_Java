@@ -73,10 +73,11 @@ public class PenduService {
                     isActivated = false;
                 }
                 String messageBot = "";
-                if(totalError == 7){
+                if(totalError >= 7){
                     message.addBotMessage("Perdu");
                     message.addBotMessage("pendu7.png");
                     isActivated = false;
+                    totalError = 0;
                     for (int i = 0; i < wordSplit.length; i++) {
                         messageBot += wordSplit[i] + " ";
                     }
