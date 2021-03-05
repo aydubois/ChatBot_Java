@@ -5,12 +5,16 @@ import chatrabia.domain.Message;
 import chatrabia.util.ChatBotData;
 import chatrabia.util.MyRunnable;
 import chatrabia.util.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
 public class MessageService extends MyRunnable {
+
+    private static Logger log = LogManager.getRootLogger();
 
     private final ShifumiService shifumiService;
     private final RegexService regexService;
@@ -22,13 +26,15 @@ public class MessageService extends MyRunnable {
     private final InsulteRusseService insulteRusseService;
     private final MiamService miamService;
     private final PenduService penduService;
+    private final AdvertisingService advertisingService;
 
     private final ChatBotData cbd = ChatBotData.getInstance();
 
     public MessageService(ShifumiService shifumiService,InsulteRusseService insulteRusseService,
                           RegexService regexService, CitationService citationService, KaamelottService kaamelottService,
                           AleatoireService aleatoireService, ChuckNorrisService chuckNorrisService,
-                          DogImageService dogImageService, MiamService miamService, PenduService penduService){
+                          DogImageService dogImageService, MiamService miamService, PenduService penduService,
+                          AdvertisingService advertisingService){
         this.shifumiService = shifumiService;
         this.regexService = regexService;
         this.citationService = citationService;
@@ -39,18 +45,35 @@ public class MessageService extends MyRunnable {
         this.insulteRusseService = insulteRusseService;
         this.miamService = miamService;
         this.penduService = penduService;
+        this.advertisingService = advertisingService;
     }
 
     public Message getMessageUser(String message, String user){
         Message msg = this.createMessage(user, message);
 
+        this.advertisingService.writeAWish(user, message);
+
         if(message.equals("unevachedansunpresquimangedesfourmisarcenciel")){
+
             int randomInt = Util.getRandom(0,10);
-            if(randomInt <8){
+            boolean isAdvertising = false;
+
+            if(randomInt <7){
+               String advertising = this.advertisingService.getMessage(user);
+               log.warn(advertising);
+
+               if(advertising != null && !"".equals(advertising)) {
+                   msg.addBotMessage(advertising);
+                   isAdvertising = true;
+               }
+            }
+
+            if(!isAdvertising && randomInt <8) {
                 String aleatoire = aleatoireService.get();
                 aleatoire = regexService.deleteAntiSlashN(aleatoire);
                 msg.addBotMessage(aleatoire);
-            }else{
+            }
+            else if(!isAdvertising){
                 String[] aleatoire = aleatoireService.getAleatoireJoieCode();
                 if(aleatoire != null && aleatoire.length >= 2){
                     aleatoire[0] = regexService.deleteAntiSlashN(aleatoire[0]);

@@ -1,5 +1,6 @@
 package chatrabia.util;
 
+import chatrabia.bot.AssocNameLike;
 import chatrabia.bot.AssocPatternResponse;
 import chatrabia.bot.AssocWordCitation;
 import chatrabia.domain.Citation;
@@ -21,11 +22,13 @@ class ParseXml {
     private final ArrayList<AssocPatternResponse> patternResponse;
     private final ArrayList<String> services;
     private final ArrayList<AssocWordCitation> assocCitations;
+    private final ArrayList<AssocNameLike> assocNameLikeList;
 
         private ParseXml(ParseBuilder builder) {
             this.services = builder.services;
             this.patternResponse = builder.patternResponse;
             this.assocCitations = builder.assocCitations;
+            this.assocNameLikeList = builder.assocNameLikeList;
         }
 
         // todo: protect ?
@@ -34,13 +37,15 @@ class ParseXml {
         }
         public ArrayList<String> getServices(){return services;}
         public ArrayList<AssocWordCitation> getAssocCitations(){return assocCitations;}
+        public ArrayList<AssocNameLike> getAssocNameLikeList() { return assocNameLikeList; };
 
 
         public static class ParseBuilder {
             private final ArrayList<AssocPatternResponse> patternResponse;
             private ArrayList<String> services;
             private ArrayList<AssocWordCitation> assocCitations;
-            public enum Types {PR, SERV, CITATION}
+            private ArrayList<AssocNameLike> assocNameLikeList;
+            public enum Types {PR, SERV, CITATION, ADVERTISING}
 
             ;
 
@@ -61,6 +66,12 @@ class ParseXml {
                 this.assocCitations = (ArrayList<AssocWordCitation>) parse(filenameXmlService, Types.CITATION);
                 return this;
             }
+
+            public ParseBuilder addXmlAdvertising(String filenameXmlService) {
+                this.assocNameLikeList = (ArrayList<AssocNameLike>) parse(filenameXmlService, Types.ADVERTISING);
+                return this;
+            }
+
             private ArrayList<?> parse(String filename, Types type) {
                 try {
                     File file= new File(filename);
@@ -84,6 +95,8 @@ class ParseXml {
                         return getServ(doc);
                     case CITATION:
                         return getCit(doc);
+                    case ADVERTISING:
+                        return getAdvertising(doc);
                     default:
                         return null;
 
@@ -158,6 +171,31 @@ class ParseXml {
                     }
                 }
                 return CITATIONObject;
+            }
+
+            private static ArrayList<AssocNameLike> getAdvertising(Document doc) {
+                ArrayList<AssocNameLike> assocNameLikeList = new ArrayList<>();
+
+                NodeList nListCategory = doc.getElementsByTagName("like");
+
+                for (int temp = 0; temp < nListCategory.getLength(); temp++) {
+
+                    Node nNodeCategory = nListCategory.item(temp);
+
+                    if (nNodeCategory.getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element eElementCategory = (Element) nNodeCategory;
+
+                        try {
+                            String name = eElementCategory.getElementsByTagName("name").item(0).getTextContent();
+                            String value = eElementCategory.getElementsByTagName("value").item(0).getTextContent();
+
+                            assocNameLikeList.add(new AssocNameLike(name, value));
+
+                        } catch(NullPointerException e){ }
+                    }
+                }
+                return assocNameLikeList;
             }
         }
     }

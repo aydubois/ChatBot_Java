@@ -13,9 +13,11 @@ public class AleatoireService extends GetHttp {
 
     private static final String urlAPI = "http://slogaanizer.free.fr/sloganize.php";
     private static final String aleatoireJoieCodeAPI = "https://lesjoiesducode.fr/random";
+
     public AleatoireService(@Qualifier("httpService")HttpService httpService){
         super(httpService);
     }
+
     @Override
     public String get() {
         try {
@@ -76,6 +78,5 @@ public class AleatoireService extends GetHttp {
             }
         }
         return null;
-
     }
 }
