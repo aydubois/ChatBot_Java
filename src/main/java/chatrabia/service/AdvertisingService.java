@@ -34,12 +34,12 @@ public class AdvertisingService {
     private final String[] advertisingSlogans = { "Offre speciale ! %s pour seulement 99.99€ !!",
                                                 "Vous en avez revé, Chat'Rabia l'a fait ! %s pour seulement 0.99€",
                                                 "Jusqu'au 10/03/2021, profitez des petits prix ! -5€ sur notre gamme de %s",
-            "Cette semaine, en exclusivité pour vous, notre nouvelle gamme de %s ! N'hésitez plus !",
-            "Chat'Rabia, des prix bas toute l'année. Venez découvrir nos meilleurs gammes de %s !",
-            "Bon plan, des %s à prix réduit !",
-            "Aujourd'hui et aujourd'hui seulement 1 %s acheter = 2 gratuits !!",
-            "Avec le code CHATRABIA, 50% de reduction dans le rayon %s",
-            "%s ! %s ! %s ! PRIX de folies sur tout le rayon %s"
+                                                "Cette semaine, en exclusivité pour vous, notre nouvelle gamme de %s ! N'hésitez plus !",
+                                                "Chat'Rabia, des prix bas toute l'année. Venez découvrir nos meilleurs gammes de %s !",
+                                                "Bon plan, des %s à prix réduit !",
+                                                "Aujourd'hui et aujourd'hui seulement 1 %s acheter = 2 gratuits !!",
+                                                "Avec le code CHATRABIA, 50% de reduction dans le rayon %s",
+                                                "PRIX de folies sur tout le rayon %s"
     };
 
 
