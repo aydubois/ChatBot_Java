@@ -26,9 +26,9 @@ public class AdvertisingService {
 
     private static final Path filePath = Paths.get("fichiers/bot/advertising.xml");
 
-    public static final String likePattern = "[Jj][e']\\s*veux\\s+(?:d'|de(?:s)?|du|un(?:e)?||le(?:s)?|la|l')?\\s*(.*)"+"|"
-                                                +"[Jj]'ai\\senvi.*?\\s(?:de|d')\\s+(.*)"+"|"
-                                                +"[Jj]'aime\\s+(?:d'|de(?:s)?|du|un(?:e)?||le(?:s)?|la|l')?\\s*(.*)";
+    public static final String likePattern = ".*[Jj][e']\\s*veux\\s+(?:d'|de(?:s)?|du|un(?:e)?||le(?:s)?|la|l')?\\s*(.*)"+"|"
+                                                +".*[Jj]'ai\\senvi.*?\\s(?:de|d')\\s+(.*)"+"|"
+                                                +".*[Jj]'aime\\s+(?:d'|de(?:s)?|du|un(?:e)?||le(?:s)?|la|l')?\\s*(.*)";
     private final ChatBotData chatBotData;
     private ArrayList<AssocNameLike> assocNameLikeList = new ArrayList<>();
     private final String[] advertisingSlogans = { "Offre speciale ! %s pour seulement 99.99€ !!",
@@ -36,8 +36,10 @@ public class AdvertisingService {
                                                 "Jusqu'au 10/03/2021, profitez des petits prix ! -5€ sur notre gamme de %s",
             "Cette semaine, en exclusivité pour vous, notre nouvelle gamme de %s ! N'hésitez plus !",
             "Chat'Rabia, des prix bas toute l'année. Venez découvrir nos meilleurs gammes de %s !",
-            "Bon plan, des %s à prix réduit !"
-
+            "Bon plan, des %s à prix réduit !",
+            "Aujourd'hui et aujourd'hui seulement 1 %s acheter = 2 gratuits !!",
+            "Avec le code CHATRABIA, 50% de reduction dans le rayon %s",
+            "%s ! %s ! %s ! PRIX de folies sur tout le rayon %s"
     };
 
 

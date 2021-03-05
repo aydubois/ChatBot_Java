@@ -27,7 +27,7 @@
         <template>Enfin ...</template>
     </Category>
     <Category>
-        <pattern>[Oo]ù.*?$|[Oo]u\s{0,1}\?</pattern>
+        <pattern>[Oo]ù.*?$|[Oo]u\s{0,1}(est.*?)\?</pattern>
         <template>Dans ton cul</template>
         <template>Ici et là-bas</template>
         <template>Chez ta mère</template>

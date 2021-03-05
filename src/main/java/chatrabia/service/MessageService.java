@@ -63,6 +63,7 @@ public class MessageService extends MyRunnable {
 
                if(advertising != null && !"".equals(advertising)) {
                    msg.addBotMessage(advertising);
+                   msg.setBotName("Publicité");
                    isAdvertising = true;
                }
             }

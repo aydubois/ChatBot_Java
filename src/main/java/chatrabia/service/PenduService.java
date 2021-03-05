@@ -43,6 +43,7 @@ public class PenduService {
             Thread.currentThread().interrupt();
         }else if(isActivated && regexService.check2Words(message.getUserMessage(),"[Ss]top") ){
             isActivated = false;
+            message.addBotMessage("Ok, pendu mis en attente. Tapes pendu pour reprendre");
             Thread.currentThread().interrupt();
         }else
         if(isActivated){

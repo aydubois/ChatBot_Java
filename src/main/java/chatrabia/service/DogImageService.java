@@ -12,7 +12,7 @@ public class DogImageService extends GetHttp {
 
     private static Logger log = LogManager.getRootLogger();
 
-    private static final String pattern = "[Dd]og|[Cc]hien|[Ww]oof|[Ww]af";
+    private static final String pattern = ".*([Dd]og|[Cc]hien|[Ww]oof|[Ww]af).*";
     private static final String imagePattern = ".*\\.(jpg|jpeg|png|gif|JPG).*";
 
     private static final String dogImageApiRandomUrl = "https://random.dog/woof.json";
