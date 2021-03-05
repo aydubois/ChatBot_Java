@@ -32,7 +32,13 @@ public class AdvertisingService {
     private final ChatBotData chatBotData;
     private ArrayList<AssocNameLike> assocNameLikeList = new ArrayList<>();
     private final String[] advertisingSlogans = { "Offre speciale ! %s pour seulement 99.99€ !!",
-                                                "Vous en avez revé, Chat'Rabia l'a fait ! %s pour seulement 0.99€" };
+                                                "Vous en avez revé, Chat'Rabia l'a fait ! %s pour seulement 0.99€",
+                                                "Jusqu'au 10/03/2021, profitez des petits prix ! -5€ sur notre gamme de %s",
+            "Cette semaine, en exclusivité pour vous, notre nouvelle gamme de %s ! N'hésitez plus !",
+            "Chat'Rabia, des prix bas toute l'année. Venez découvrir nos meilleurs gammes de %s !",
+            "Bon plan, des %s à prix réduit !"
+
+    };
 
 
     public AdvertisingService() {

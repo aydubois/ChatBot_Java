@@ -51,6 +51,7 @@ class ParseXml {
             ;
 
             public ParseBuilder(String filenameXmlConfig) {
+                // Permet de reparser le fichier advertising à chaque ajout de mot sans devoir tout reparser avec.
                 if("fichiers/bot/advertising.xml".equals(filenameXmlConfig)){
                     this.assocNameLikeList = (ArrayList<AssocNameLike>) parse(filenameXmlConfig, Types.ADVERTISING);
                 }else{
