@@ -52,7 +52,9 @@
     <Category>
         <pattern>[Tt]est</pattern>
         <template>Info Coronavirus COVID-19 - Tester - Alerter - Protéger ... (Dédicace à Tommy)</template>
+        <template>Les antibiotiques, c'est pas automatiques ! (Dédicace à Tommy)</template>
+        <template>Sans casque à vélo, votre enfant risque plus d'un bobo - Ceci est un message du gouvernement à caractère informatif (Dédicace à Tommy)</template>
         <template>Pour votre santé, évitez de manger trop gras, trop sucré, trop salé (Dédicace à Tommy)</template>
-        <template>La gonorrhée est une infection causée par la bactérie Neisseria Gonorrhea (gonocoque), transmise pendant les rapports sexuels non protégés</template>
+        <template>La gonorrhée est une infection causée par la bactérie Neisseria Gonorrhea, transmise pendant les rapports sexuels non protégés  (Dédicace à Tommy)</template>
     </Category>
 </Config>
