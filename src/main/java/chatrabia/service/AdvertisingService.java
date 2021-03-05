@@ -57,9 +57,14 @@ public class AdvertisingService {
 
         List<String> likeList = getUserWishList(userName);
 
-        if(likeList == null && likeList.size() == 0) return null;
+        if(likeList == null || likeList.isEmpty()) return null;
 
-        int randomLikeIndex = Util.getRandom(0, likeList.size() -1);
+        int randomLikeIndex = 0;
+
+        if(likeList.size() >1) {
+            randomLikeIndex = Util.getRandom(0, likeList.size() -1);
+        }
+
         String like = likeList.get(randomLikeIndex);
 
         return String.format(slogan, like);
