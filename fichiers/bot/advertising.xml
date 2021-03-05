@@ -11,4 +11,12 @@
         <name>1234</name>
         <value>patates</value>
     </like>
+    <like>
+        <name>1234</name>
+        <value>chien</value>
+    </like>
+    <like>
+        <name>ponyo</name>
+        <value>chien</value>
+    </like>
 </Advertising>

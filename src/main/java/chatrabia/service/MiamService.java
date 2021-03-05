@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @Service
 public class MiamService extends GetHttp {
-    private String pattern = "j'ai.*faim|on va au rest.*?|[Mm]iam";
+    private String pattern = ".*(j'ai.*faim).*|.*(on va au rest.*?).*|.*([Mm]iam).*";
 
     public MiamService(@Qualifier("httpService")HttpService httpService){
             super(httpService);
