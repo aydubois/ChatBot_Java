@@ -34,11 +34,17 @@ public class PenduService {
         if(!isActivated && regexService.check2Words(message.getUserMessage(),pattern)){
             if (serviceActivated == null) {
                 isActivated = true;
-                String botMessage = "";
-                for (int i = 0; i < word.length(); i++) {
-                    botMessage += "_ ";
+                String[] wordSplit = word.split("");
+
+                String messageBot = "";
+                for (int i = 0; i < wordSplit.length; i++) {
+                    if (listIndexFound.contains(i)) {
+                        messageBot += wordSplit[i] + " ";
+                    } else {
+                        messageBot += "_ ";
+                    }
                 }
-                message.addBotMessage(botMessage);
+                message.addBotMessage(messageBot);
             }
             Thread.currentThread().interrupt();
         }else if(isActivated && regexService.check2Words(message.getUserMessage(),"[Ss]top") ){
@@ -79,6 +85,7 @@ public class PenduService {
                     message.addBotMessage("pendu7.png");
                     isActivated = false;
                     totalError = 0;
+                    listIndexFound.clear();
                     for (int i = 0; i < wordSplit.length; i++) {
                         messageBot += wordSplit[i] + " ";
                     }

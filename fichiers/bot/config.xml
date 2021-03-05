@@ -42,6 +42,20 @@
         <template>42</template>
     </Category>
     <Category>
+        <pattern>ça va|sa va</pattern>
+        <template>Tu demandes à une IA si ça va ? Sérieusement ?</template>
+    </Category>
+    <Category>
+        <pattern>prout|caca|pouet|pipi|\scul</pattern>
+        <template>Mais t'as quel âge, sérieux ?</template>
+        <template>Cette discussion n'est clairement pas assez profonde pour moi ...</template>
+    </Category>
+    <Category>
+        <pattern>[Pp]ourquoi.*?|[Cc]omment.*?</pattern>
+        <template>Je t'en pose des questions moi ?</template>
+        <template>La réponse risquerait de ne pas te plaire ... du coup je préfère ne rien répondre.</template>
+    </Category>
+    <Category>
         <pattern>(^[Jj]e t'aime$)|(jtm)</pattern>
         <template>Comme un fou, comme un soldat ? #NOP</template>
         <template>pfff ...</template>
