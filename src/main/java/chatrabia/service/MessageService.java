@@ -58,7 +58,7 @@ public class MessageService extends MyRunnable {
             int randomInt = Util.getRandom(0,10);
             boolean isAdvertising = false;
 
-            if(randomInt <7){
+            if(randomInt < 3){
                String advertising = this.advertisingService.getMessage(user);
                log.warn(advertising);
 

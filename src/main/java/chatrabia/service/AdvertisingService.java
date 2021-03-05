@@ -73,7 +73,7 @@ public class AdvertisingService {
                 .collect(Collectors.toList());
     }
 
-    public String getWish(String message) {
+    private String getWish(String message) {
         Pattern pattern = Pattern.compile(likePattern);
         Matcher matcher = pattern.matcher(message);
 
@@ -87,7 +87,7 @@ public class AdvertisingService {
         return likeMatch;
     }
 
-    public boolean isAWish(String message) {
+    private boolean isAWish(String message) {
         return message.matches(likePattern);
     }
 
@@ -124,5 +124,6 @@ public class AdvertisingService {
             log.error(e.toString());
         }
 
+        assocNameLikeList = chatBotData.getAssocNameLikeList();
     }
 }
