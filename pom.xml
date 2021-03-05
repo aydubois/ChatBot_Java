@@ -14,7 +14,7 @@
 	<name>chatrabia</name>
 	<description>Un chatbot qui vous veut du bien</description>
 	<properties>
-		<java.version>15</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
