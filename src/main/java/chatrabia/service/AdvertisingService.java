@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -25,13 +26,13 @@ public class AdvertisingService {
 
     private static final Path filePath = Paths.get("fichiers/bot/advertising.xml");
 
-    public static final String likePattern = "[Jj][e']\\s*veux\\s+(?:de|d'|des|du|un|une|les|le|la|l')?\\s*(.*)"+"|"
+    public static final String likePattern = "[Jj][e']\\s*veux\\s+(?:d'|de(?:s)?|du|un(?:e)?||le(?:s)?|la|l')?\\s*(.*)"+"|"
                                                 +"[Jj]'ai\\senvi.*?\\s(?:de|d')\\s+(.*)"+"|"
-                                                +"[Jj]'aime\\s+(?:de|d'|des|du|un|une|les|le|la|l')?\\s*(.*)";
+                                                +"[Jj]'aime\\s+(?:d'|de(?:s)?|du|un(?:e)?||le(?:s)?|la|l')?\\s*(.*)";
     private final ChatBotData chatBotData;
     private ArrayList<AssocNameLike> assocNameLikeList = new ArrayList<>();
-    private final String[] advertisingSlogans = { "Offre speciale ! %s à seulement 99.99€ !!",
-                                                "Vous en avez revé, Chat'Rabia l'a fait ! %s à seulement 0.99€" };
+    private final String[] advertisingSlogans = { "Offre speciale ! %s pour seulement 99.99€ !!",
+                                                "Vous en avez revé, Chat'Rabia l'a fait ! %s pour seulement 0.99€" };
 
 
     public AdvertisingService() {
@@ -97,6 +98,13 @@ public class AdvertisingService {
         String wish = getWish(message);
         if(wish == null || "".equals(wish)) return;
 
+        // on verifie qu'on a pas deja stocké cette envie pour cette personne
+        long nbEqualsExistingWishes = assocNameLikeList.stream()
+                                            .filter(anm -> userName.equals(anm.getName()) && wish.equals(anm.getLike()))
+                                            .count();
+
+        if(nbEqualsExistingWishes > 0) return;
+
         List<String> lines = null;
         try {
             lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
@@ -105,15 +113,17 @@ public class AdvertisingService {
             log.error(e.toString());
         }
 
+        // on recupere la position juste avant </Advertising>
         int position = lines.size() - 1;
 
         String[] newLines = {
-                "<like>",
-                "<name>"+userName+"</name>",
-                "<value>"+wish+"</value>",
-                "</like>"
+                "    <like>",
+                "        <name>"+userName+"</name>",
+                "        <value>"+wish+"</value>",
+                "    </like>"
         };
 
+        // comme on ajoute toujours à la même position, il faut inserer à l'envers (ou inverser l'ordre dans newLines)
         for (int i = newLines.length - 1; i >= 0 ; i--) {
             lines.add(position, newLines[i]);
         }

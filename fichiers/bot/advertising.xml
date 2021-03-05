@@ -1,14 +1,10 @@
 <Advertising>
     <like>
-        <name>pil</name>
-        <value>drogue</value>
+        <name>klaus</name>
+        <value>boudin</value>
     </like>
-<like>
-<name>pil</name>
-<value>chips</value>
-</like>
-<like>
-<name>pil</name>
-<value>frites</value>
-</like>
+    <like>
+        <name>klaus</name>
+        <value>dominer le monde</value>
+    </like>
 </Advertising>

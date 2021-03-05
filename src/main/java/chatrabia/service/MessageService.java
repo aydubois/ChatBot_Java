@@ -60,7 +60,6 @@ public class MessageService extends MyRunnable {
 
             if(randomInt < 3){
                String advertising = this.advertisingService.getMessage(user);
-               log.warn(advertising);
 
                if(advertising != null && !"".equals(advertising)) {
                    msg.addBotMessage(advertising);
