@@ -45,5 +45,9 @@ public class ChatBotData {
     public ArrayList<AssocWordCitation> getAssocCitations() {
         return assocCitations;
     }
-    public ArrayList<AssocNameLike> getAssocNameLikeList() { return assocNameLikeList; }
+    public ArrayList<AssocNameLike> getAssocNameLikeList() {
+        ParseXml parseXml = new ParseXml.ParseBuilder("fichiers/bot/advertising.xml").build();
+
+        return parseXml.getAssocNameLikeList();
+    }
 }

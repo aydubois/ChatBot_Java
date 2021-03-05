@@ -12,6 +12,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +42,7 @@ class ParseXml {
 
 
         public static class ParseBuilder {
-            private final ArrayList<AssocPatternResponse> patternResponse;
+            private ArrayList<AssocPatternResponse> patternResponse;
             private ArrayList<String> services;
             private ArrayList<AssocWordCitation> assocCitations;
             private ArrayList<AssocNameLike> assocNameLikeList;
@@ -50,7 +51,12 @@ class ParseXml {
             ;
 
             public ParseBuilder(String filenameXmlConfig) {
-                this.patternResponse = (ArrayList<AssocPatternResponse>) parse(filenameXmlConfig, Types.PR);
+                if("fichiers/bot/advertising.xml".equals(filenameXmlConfig)){
+                    this.assocNameLikeList = (ArrayList<AssocNameLike>) parse(filenameXmlConfig, Types.ADVERTISING);
+                }else{
+
+                    this.patternResponse = (ArrayList<AssocPatternResponse>) parse(filenameXmlConfig, Types.PR);
+                }
             }
 
             public ParseXml build() {
