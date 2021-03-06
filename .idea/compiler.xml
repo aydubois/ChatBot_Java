@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="chatrabia" target="15" />
+      <module name="chatrabia" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
