@@ -35,7 +35,7 @@ public class MessageController {
         return messageService.getMessageUser(message, user);
     }
 
-    @CrossOrigin(origins = {"http://127.0.0.1:3300", "http://localhost:3300", "https://zicap.legeay.info"})
+    @CrossOrigin(origins = {"http://127.0.0.1:3000", "http://localhost:3000", "https://zicap.legeay.info"})
     @GetMapping(value = "{origin}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public TotalDispoCenter getTotalDispo(@PathVariable String origin) throws ExternalAPIException {
