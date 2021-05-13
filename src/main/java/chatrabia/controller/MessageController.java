@@ -1,23 +1,26 @@
 package chatrabia.controller;
 
+import chatrabia.exception.ExternalAPIException;
 import chatrabia.service.ChuckNorrisService;
 import chatrabia.domain.Message;
+import chatrabia.service.HttpService;
 import chatrabia.service.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/")
+@Slf4j
 public class MessageController {
 
-    private ChuckNorrisService chuckNorrisService;
-    private MessageService messageService;
+    private final MessageService messageService;
+    private final HttpService httpService;
 
-    public MessageController(ChuckNorrisService chuckNorrisService, MessageService messageService) {
+    public MessageController(MessageService messageService, HttpService httpService) {
         super();
         this.messageService = messageService;
-        this.chuckNorrisService = chuckNorrisService;
+        this.httpService = httpService;
     }
 
     @GetMapping()
@@ -29,9 +32,25 @@ public class MessageController {
     @GetMapping(value = "{user}/{message}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Message getQuestion(@PathVariable String user, @PathVariable String message) {
-        Message currentMessage = messageService.getMessageUser(message, user);
+        return messageService.getMessageUser(message, user);
+    }
 
-        return currentMessage;
+    @CrossOrigin(origins = {"http://127.0.0.1:3300", "http://localhost:3300", "https://zicap.legeay.info"})
+    @GetMapping(value = "{origin}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public TotalDispoCenter getTotalDispo(@PathVariable String origin) throws ExternalAPIException {
+        return this.httpService.sendGetRequest(String.format("https://www.doctolib.fr/search_results/%s.json", origin), TotalDispoCenter.class, null);
+    }
+
+    private static class TotalDispoCenter {
+        public Integer total;
+
+        @Override
+        public String toString() {
+            return "TotalDispoCenter{" +
+                    "total=" + total +
+                    '}';
+        }
     }
 
     // [APIs]
