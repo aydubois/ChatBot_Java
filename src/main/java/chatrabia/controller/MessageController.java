@@ -47,10 +47,12 @@ public class MessageController {
     public TotalDispoCenter getTotalDispo(@PathVariable String motiveId, @PathVariable String agendaIds, @PathVariable String praticeId) throws ExternalAPIException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String todayDateString = ZonedDateTime.now().format(formatter);
+        String tomorrowDateString = ZonedDateTime.now().plusDays(1).format(formatter);
         String url = "https://www.doctolib.fr/availabilities.json?start_date="+todayDateString
+                        +"&end_date="+tomorrowDateString
                         +"&visit_motive_ids="+motiveId
                         +"&agenda_ids="+agendaIds
-                        +"&insurance_sector=public&practice_ids="+praticeId+"&destroy_temporary=true&limit=2";
+                        +"&insurance_sector=public&practice_ids="+praticeId+"&limit=2";
 
         return this.httpService.sendGetRequest(url, TotalDispoCenter.class, null);
     }
@@ -59,6 +61,7 @@ public class MessageController {
 
         public Integer total;
         public String reason;
+        public String next_slot;
     }
 
     // [APIs]
