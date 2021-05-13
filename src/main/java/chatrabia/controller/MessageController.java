@@ -9,6 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+
 @RestController
 @RequestMapping(value = "/")
 @Slf4j
@@ -36,21 +42,23 @@ public class MessageController {
     }
 
     @CrossOrigin(origins = {"http://127.0.0.1:3000", "http://localhost:3000", "https://zicap.legeay.info"})
-    @GetMapping(value = "{origin}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{motiveId}/{agendaIds}/{praticeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public TotalDispoCenter getTotalDispo(@PathVariable String origin) throws ExternalAPIException {
-        return this.httpService.sendGetRequest(String.format("https://www.doctolib.fr/search_results/%s.json", origin), TotalDispoCenter.class, null);
+    public TotalDispoCenter getTotalDispo(@PathVariable String motiveId, @PathVariable String agendaIds, @PathVariable String praticeId) throws ExternalAPIException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String todayDateString = ZonedDateTime.now().format(formatter);
+        String url = "https://www.doctolib.fr/availabilities.json?start_date="+todayDateString
+                        +"&visit_motive_ids="+motiveId
+                        +"&agenda_ids="+agendaIds
+                        +"&insurance_sector=public&practice_ids="+praticeId+"&destroy_temporary=true&limit=2";
+
+        return this.httpService.sendGetRequest(url, TotalDispoCenter.class, null);
     }
 
     private static class TotalDispoCenter {
-        public Integer total;
 
-        @Override
-        public String toString() {
-            return "TotalDispoCenter{" +
-                    "total=" + total +
-                    '}';
-        }
+        public Integer total;
+        public String reason;
     }
 
     // [APIs]
